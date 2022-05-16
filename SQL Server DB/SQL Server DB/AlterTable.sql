@@ -1,5 +1,4 @@
 USE straviadb;
-
 /*Integridad referencial para relaciones 1:N y 1:N
 ALTER TABLE USUARIO
 	ADD CONSTRAINT USUARIO_ROL_DEF_FK FOREIGN KEY(id_rol)
