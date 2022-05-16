@@ -2,7 +2,7 @@
 
 namespace StraviaTec.API.Models
 {
-    public class Categorias
+    public class Categoria
     {
         [Key]
         public int codigo { get; set; }
