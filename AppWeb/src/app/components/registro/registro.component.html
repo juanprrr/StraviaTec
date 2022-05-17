@@ -1,6 +1,9 @@
 <div class="container">
     <mat-toolbar class="style">
       <span>Registarse</span>
+      <button mat-icon-button class="margen" routerLink="/" aria-label="Example icon-button with menu icon">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
 
 
@@ -31,13 +34,18 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-primary"><i
-                                    class="bi bi-person-badge-fill text-white"></i></span>
-                            <input type="email"  class="form-control" placeholder="Correo">
+                                    class="bi bi-person-plus-fill text-white"></i></span>
+                            <input type="years"  class="form-control" placeholder="Edad">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-primary"><i
-                                    class="bi bi-card-heading text-white"></i></span>
-                            <input type="number"  class="form-control" placeholder="Número de cédula">
+                                    class="bi bi-person-plus-fill text-white"></i></span>
+                            <input type="country"  class="form-control" placeholder="Nacionalidad">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text bg-primary"><i
+                                    class="bi bi-person-plus-fill text-white"></i></span>
+                            <input type="user"  class="form-control" placeholder="Usuario">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-primary"><i
@@ -47,16 +55,13 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-primary"><i
                                     class="bi bi-telephone-fill text-white"></i></span>
-                            <input type="number"  class="form-control" placeholder="Teléfono">
+                            <input type="img"  class="form-control" placeholder="Foto">
                         </div>
+                        
 
-                        <button class="btn btn-primary text-center mt-2" type="submit" >
-                            Registrar
-                        </button>
+                        <button class="boton" mat-raised-button mat-button >Registrarse</button>
 
-                        <button class="btn btn-primary text-center mt-2" type="submit" routerLink="/">
-                            Salir
-                        </button>
+                        
                     </div>
                 </form>
             </div>

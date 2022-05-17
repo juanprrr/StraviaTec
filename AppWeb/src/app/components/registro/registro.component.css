@@ -1,3 +1,20 @@
 .style {
-    background-color: darkorange;
+    background-color: orange;
 }
+
+.ancho {
+    width: 30%;
+    margin-top: 2%;
+  }
+
+.boton {
+    width: 27%;
+    background-color: orange;
+    margin-top: 3%;
+  }
+
+.margen {
+    margin-left: auto;
+}
+
+  
