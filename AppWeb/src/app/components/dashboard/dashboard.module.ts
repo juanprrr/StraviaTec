@@ -3,22 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { UsuariosComponent } from './usuarios/usuarios.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChallengesComponent } from './challenges/challenges.component';
 import { ExploreComponent } from './explore/explore.component';
+import { TrainingComponent } from './training/training.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    UsuariosComponent,
     InicioComponent,
     NavbarComponent,
     ChallengesComponent,
-    ExploreComponent
+    ExploreComponent,
+    TrainingComponent
   ],
   imports: [
     CommonModule,
