@@ -18,4 +18,8 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/dashboard');
   }
 
+  registrar() {
+    this.router.navigateByUrl('/registro');
+  }
+
 }
