@@ -7,8 +7,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from '../shared/shared.module';
-import { ReportesComponent } from './reportes/reportes.component';
 import { ChallengesComponent } from './challenges/challenges.component';
+import { ExploreComponent } from './explore/explore.component';
 
 
 @NgModule({
@@ -17,8 +17,8 @@ import { ChallengesComponent } from './challenges/challenges.component';
     UsuariosComponent,
     InicioComponent,
     NavbarComponent,
-    ReportesComponent,
-    ChallengesComponent
+    ChallengesComponent,
+    ExploreComponent
   ],
   imports: [
     CommonModule,
