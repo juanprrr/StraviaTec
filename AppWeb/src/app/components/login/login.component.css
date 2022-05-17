@@ -17,3 +17,9 @@
   .ancho {
     width: 80%;
   }
+
+
+  .boton {
+    width: 80%;
+    background-color: orange;
+  }
