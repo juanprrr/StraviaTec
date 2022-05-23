@@ -12,13 +12,16 @@ EXEC sp_crear_rol 1, 'organiza';
 EXEC sp_crear_rol 2, 'deportista';
 SELECT * FROM straviadb.dbo.ROL;
 
+DROP PROCEDURE sp_insertar_usuario
 /*CREAR USUARIOS: FALTA AGREGAR ID CARRERA  Y CARGAR IMAGEN*/
 CREATE PROCEDURE sp_insertar_usuario
 @_usuario VARCHAR(20),
 @rol_usuario INT,
+@id_carrera INT,
 @_nombre VARCHAR(20),
 @_apellido1 VARCHAR(10),
 @_apellido2 VARCHAR(10),
+@_foto IMAGE,
 @_nacionalidad VARCHAR(30),
 @_fecha_nacimiento DATE,
 @_password_ VARCHAR(18)
@@ -26,31 +29,35 @@ AS
 INSERT INTO straviadb.dbo.USUARIO(
 usuario,
 id_rol,
+id_carrera,
 nombre,
 apellido1,
 apellido2,
+foto,
 nacionalidad,
 fecha_nacimiento,
 _password
 ) VALUES(
 @_usuario,
 @rol_usuario,
+@id_carrera,
 @_nombre,
 @_apellido1,
 @_apellido2,
+@_foto,
 @_nacionalidad,
 @_fecha_nacimiento,
 @_password_
 );
 
-EXEC sp_insertar_usuario 'juancho23', 1,'Juan', 'Peña',
-'Rostrán', 'Nicaragüense', '2000-01-15', '1234567palomitas';
+EXEC sp_insertar_usuario 'juancho23', 1,NULL,'Juan', 'Peña',
+'Rostrán',NULL, 'Nicaragüense', '2000-01-15', '1234567palomitas';
 
-EXEC sp_insertar_usuario 'jordan23', 2,'Michael', 'Jeffrey',
-'Jordan', 'Estadounidense', '1963-02-17', '1234567palomitas';
+EXEC sp_insertar_usuario 'jordan23', 2,NULL,'Michael', 'Jeffrey',
+'Jordan',NULL, 'Estadounidense', '1963-02-17', '1234567palomitas';
 
-EXEC sp_insertar_usuario 'lebron23', 2,'LeBron', 'Raymone',
-'James', 'Estadounidense', '1984-12-30', '1234567palomitas';
+EXEC sp_insertar_usuario 'lebron23', 2,NULL,'LeBron', 'Raymone',
+'James',NULL, 'Estadounidense', '1984-12-30', '1234567palomitas';
 
 SELECT * FROM straviadb.dbo.USUARIO;
 /*CONSULTA PARA OBTENER USUARIO POR PRIMARY KEY*/
