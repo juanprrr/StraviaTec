@@ -31,17 +31,17 @@
           <AssociatedConnUserName />
           <FullPath>createDB.sql</FullPath>
         </FileNode>
-        <FileNode Name="schema.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
-          <AssociatedConnUserName />
-          <FullPath>schema.sql</FullPath>
-        </FileNode>
         <FileNode Name="tables.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>tables.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Usuario_sps.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Usuario_sps.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
