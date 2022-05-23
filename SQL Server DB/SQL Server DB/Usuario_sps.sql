@@ -13,7 +13,7 @@ EXEC sp_crear_rol 2, 'deportista';
 SELECT * FROM straviadb.dbo.ROL;
 
 DROP PROCEDURE sp_insertar_usuario
-/*CREAR USUARIOS: FALTA AGREGAR ID CARRERA  Y CARGAR IMAGEN*/
+/*CREAR USUARIOS*/
 CREATE PROCEDURE sp_insertar_usuario
 @_usuario VARCHAR(20),
 @rol_usuario INT,
@@ -90,16 +90,35 @@ EXEC sp_edad_usuarios 'juancho23'
 EXEC sp_edad_usuarios 'lebron23'
 
 /*ACTUALIZAR REGISTROS DE USUARIO*/
+------ACTUALIZAR FOTO-------
 
 CREATE PROCEDURE sp_actualizar_foto
-@nombreusuario VARCHAR(20)
+@nombreusuario VARCHAR(20),
+@foto IMAGE
 AS
-UPDATE straviadb.dbo.USUARIO SET foto = 
-(SELECT * 
-FROM OPENROWSET 
-(BULK 'C:\Users\HP\Desktop\TEC\IX Semestre\Bases de datos\StraviaTec\SQL Server DB\fotosPerfil\lebron23.png', SINGLE_BLOB)
-IMG_PERFIL)
+UPDATE straviadb.dbo.USUARIO SET foto = @foto
 WHERE usuario= @nombreusuario;
-drop procedure sp_actualizar_foto
-EXEC sp_actualizar_foto 'lebron23'
-EXEC sp_consultar_usuario 'lebron23';
+
+------ACTUALIZAR CARRERA------
+CREATE PROCEDURE sp_actualizar_carrera
+@nombreusuario VARCHAR(20),
+@_idcarrera INT
+AS
+UPDATE straviadb.dbo.USUARIO SET id_carrera = @_idcarrera
+WHERE usuario= @nombreusuario;
+
+------ACTUALIZAR ROL------
+CREATE PROCEDURE sp_actualizar_rol
+@nombreusuario VARCHAR(20),
+@_idrol INT
+AS
+UPDATE straviadb.dbo.USUARIO SET id_rol = @_idrol
+WHERE usuario= @nombreusuario;
+------ACTUALIZAR PASSWORD------
+CREATE PROCEDURE sp_actualizar_password
+@nombreusuario VARCHAR(20),
+@_pwd VARCHAR(18)
+AS
+UPDATE straviadb.dbo.USUARIO SET _password = @_pwd
+WHERE usuario= @nombreusuario;
+
