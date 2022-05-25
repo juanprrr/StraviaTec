@@ -41,7 +41,9 @@ CREATE TABLE CARRERA(
 	costo DECIMAL(10, 2) NOT NULL, /* de fondo o altitud*/
 	PRIMARY KEY(id)
 );
-ALTER TABLE straviadb.dbo.CARRERA DROP COLUMN categoria
+--ALTER TABLE straviadb.dbo.CARRERA
+--ALTER COLUMN id_actividad INT NULL;
+--ALTER TABLE straviadb.dbo.CARRERA DROP COLUMN categoria
 CREATE TABLE GRUPO(
 	id INT NOT NULL,
 	id_admin VARCHAR(20) NOT NULL,

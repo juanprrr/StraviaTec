@@ -22,6 +22,11 @@ VALUES
 )
 END;
 
+EXEC sp_crear_actividad 1, NULL, 'jordan23', '12:34:54.1', '12:39:54.1', 'Correr', 
+12, '2022-05-24', NULL;
+EXEC sp_crear_actividad 2, NULL, 'jordan23', '5:34:54.1', '5:39:54.1', 'Natación', 
+1, '2022-05-24', NULL;
+
 /*CREAR CARRERA*/
 CREATE PROCEDURE sp_crear_carrera
 @_id INT,
@@ -38,6 +43,8 @@ INSERT INTO straviadb.dbo.CARRERA
 @_id, @_id_actividad, @nombre,@_fecha, @_costo)
 END;
 
+EXEC sp_crear_carrera 123, null, 'Maraton SJ', '2022-05-31', 12.50
+EXEC sp_crear_carrera 321, null, 'Maraton SC', '2022-05-31', 12.50
 /*CREAR ROLES*/
 CREATE PROCEDURE sp_crear_rol
 @rol_id INT,
@@ -109,9 +116,10 @@ EXEC sp_consultar_usuario 'lebron23';
 
 /*CONSULTA PARA OBTENER TODOS LOS USUARIOS*/
 CREATE PROCEDURE sp_consultar_usuarios
-AS BEGIN
+AS
 SELECT * FROM straviadb.dbo.USUARIO
-END;
+
+DROP PROCEDURE	sp_consultar_usuarios
 EXEC sp_consultar_usuarios;
 
 /*CONSULTA PARA OBTENER EDAD DE USUARIOS*/
@@ -151,6 +159,8 @@ CREATE PROCEDURE sp_actualizar_carrera
 AS
 UPDATE straviadb.dbo.USUARIO SET id_carrera = @_idcarrera
 WHERE usuario= @nombreusuario;
+
+EXEC sp_actualizar_carrera 'jordan23', 123;
 ------ACTUALIZAR ROL------
 CREATE PROCEDURE sp_actualizar_rol
 @nombreusuario VARCHAR(20),
@@ -158,6 +168,7 @@ CREATE PROCEDURE sp_actualizar_rol
 AS
 UPDATE straviadb.dbo.USUARIO SET id_rol = @_idrol
 WHERE usuario= @nombreusuario;
+
 ------ACTUALIZAR PASSWORD------
 CREATE PROCEDURE sp_actualizar_password
 @nombreusuario VARCHAR(20),
@@ -165,14 +176,19 @@ CREATE PROCEDURE sp_actualizar_password
 AS
 UPDATE straviadb.dbo.USUARIO SET _password = @_pwd
 WHERE usuario= @nombreusuario;
+
 ------ELIMINAR USUARIO------
 CREATE PROCEDURE sp_eliminar_usuario
 @nombreusuario VARCHAR(20)
 AS
 BEGIN
+DELETE FROM straviadb.dbo.ACTIVIDAD 
+WHERE id_usuario=@nombreusuario 
 DELETE FROM straviadb.dbo.USUARIO 
-WHERE usuario=@nombreusuario
+WHERE usuario=@nombreusuario 
 END;
 
+--EXEC sp_eliminar_usuario 'jordan23'
+--EXEC sp_consultar_usuarios
 
 
