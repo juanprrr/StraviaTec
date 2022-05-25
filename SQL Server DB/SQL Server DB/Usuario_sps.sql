@@ -26,6 +26,7 @@ EXEC sp_crear_actividad 1, NULL, 'jordan23', '12:34:54.1', '12:39:54.1', 'Correr
 12, '2022-05-24', NULL;
 EXEC sp_crear_actividad 2, NULL, 'jordan23', '5:34:54.1', '5:39:54.1', 'Natación', 
 1, '2022-05-24', NULL;
+SELECT * FROM straviadb.dbo.ACTIVIDAD
 /*OBTENER ACTIVIDAD POR USUARIO*/
 CREATE PROCEDURE sp_consultar_actividad_usuario
 @usuario_id VARCHAR(20)
@@ -34,6 +35,17 @@ SELECT * FROM straviadb.dbo.ACTIVIDAD
 WHERE id_usuario=@usuario_id;
 
 /*OBTENER ACTIVIDAD DE AMIGOS DEL USUARIO*/
+
+/*OBTENER LA DURACIÓN DE UNA ACTIVIDAD*/
+CREATE PROCEDURE sp_consultar_duracion
+@id_actividad INT
+AS
+SELECT id_usuario, fecha, tipo_actividad, 
+CONVERT(VARCHAR(8), DATEADD(SECOND, DATEDIFF(SECOND,hora_inicio, hora_fin),0), 108) 
+AS Duracion
+FROM straviadb.dbo.ACTIVIDAD
+WHERE id=@id_actividad
+EXEC sp_consultar_duracion 1
 
 /*CREAR CARRERA*/
 CREATE PROCEDURE sp_crear_carrera
