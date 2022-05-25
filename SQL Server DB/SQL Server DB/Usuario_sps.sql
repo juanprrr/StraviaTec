@@ -26,6 +26,14 @@ EXEC sp_crear_actividad 1, NULL, 'jordan23', '12:34:54.1', '12:39:54.1', 'Correr
 12, '2022-05-24', NULL;
 EXEC sp_crear_actividad 2, NULL, 'jordan23', '5:34:54.1', '5:39:54.1', 'Natación', 
 1, '2022-05-24', NULL;
+/*OBTENER ACTIVIDAD POR USUARIO*/
+CREATE PROCEDURE sp_consultar_actividad_usuario
+@usuario_id VARCHAR(20)
+AS
+SELECT * FROM straviadb.dbo.ACTIVIDAD
+WHERE id_usuario=@usuario_id;
+
+/*OBTENER ACTIVIDAD DE AMIGOS DEL USUARIO*/
 
 /*CREAR CARRERA*/
 CREATE PROCEDURE sp_crear_carrera
@@ -45,6 +53,38 @@ END;
 
 EXEC sp_crear_carrera 123, null, 'Maraton SJ', '2022-05-31', 12.50
 EXEC sp_crear_carrera 321, null, 'Maraton SC', '2022-05-31', 12.50
+/*OBTENER CARRERAS*/
+CREATE PROCEDURE sp_consultar_carrrera
+@id_carrera INT
+AS
+SELECT * FROM straviadb.dbo.CARRERA
+WHERE id=@id_carrera
+EXEC sp_consultar_carrrera 123
+
+/*ACTUALIZAR DATOS DE CARRERA*/
+
+--NUEVA FECHA DE CARRERA
+CREATE PROCEDURE sp_actualizar_fecha_carrera
+@_id INT,
+@_fecha DATE
+AS
+UPDATE straviadb.dbo.CARRERA SET fecha = @_fecha
+WHERE id= @_id;
+--NUEVO NOMBRE DE CARRERA
+CREATE PROCEDURE sp_actualizar_nombre_carrera
+@_id INT,
+@_nombre VARCHAR(20)
+AS
+UPDATE straviadb.dbo.CARRERA SET nombre = @_nombre
+WHERE id= @_id;
+--NUEVO PRECIO DE CARRERA
+CREATE PROCEDURE sp_actualizar_precio_carrera
+@_id INT,
+@_precio DECIMAL(10, 2)
+AS
+UPDATE straviadb.dbo.CARRERA SET costo = @_precio
+WHERE id= @_id;
+
 /*CREAR ROLES*/
 CREATE PROCEDURE sp_crear_rol
 @rol_id INT,
