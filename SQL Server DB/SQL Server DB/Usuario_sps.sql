@@ -55,23 +55,36 @@ CREATE PROCEDURE sp_crear_carrera
 @_fecha DATE,
 @_costo DECIMAL(10,2)
 AS
-BEGIN
 INSERT INTO straviadb.dbo.CARRERA
 (id, id_actividad, nombre, fecha, costo
 ) VALUES
 (
 @_id, @_id_actividad, @nombre,@_fecha, @_costo)
-END;
 
 EXEC sp_crear_carrera 123, null, 'Maraton SJ', '2022-05-31', 12.50
 EXEC sp_crear_carrera 321, null, 'Maraton SC', '2022-05-31', 12.50
-/*OBTENER CARRERAS*/
-CREATE PROCEDURE sp_consultar_carrrera
+/*OBTENER CARRERA*/
+CREATE PROCEDURE sp_consultar_carrera
 @id_carrera INT
 AS
 SELECT * FROM straviadb.dbo.CARRERA
 WHERE id=@id_carrera
 EXEC sp_consultar_carrrera 123
+/*OBTENER CARRERAS*/
+CREATE PROCEDURE sp_consultar_carreras
+AS
+SELECT * FROM straviadb.dbo.CARRERA
+EXEC sp_consultar_carreras
+
+/*ELIMINAR CARRERAS*/
+CREATE PROCEDURE sp_eliminar_carrera
+@_id INT
+AS
+BEGIN
+DELETE FROM straviadb.dbo.CARRERA 
+WHERE id=@_id 
+END;
+EXEC sp_eliminar_carrera 123
 
 /*ACTUALIZAR DATOS DE CARRERA*/
 
