@@ -2,7 +2,7 @@ USE straviadb;
 
 CREATE TABLE ACTIVIDAD(
 	id INT NOT NULL,
-	id_reto INT NOT NULL,
+	id_reto INT,
 	id_usuario VARCHAR(20) NOT NULL,
 	hora_inicio TIME,
 	hora_fin TIME,
@@ -12,7 +12,6 @@ CREATE TABLE ACTIVIDAD(
 	recorrido XML,
 	PRIMARY KEY(id)
 );
-
 CREATE TABLE PATROCINADOR(
 	id INT NOT NULL,
 	nombre_rep VARCHAR(15) NOT NULL,
@@ -40,10 +39,9 @@ CREATE TABLE CARRERA(
 	nombre VARCHAR(20)NOT NULL,
 	fecha DATE NOT NULL,
 	costo DECIMAL(10, 2) NOT NULL, /* de fondo o altitud*/
-	categoria VARCHAR(20) NOT NULL
 	PRIMARY KEY(id)
 );
-
+ALTER TABLE straviadb.dbo.CARRERA DROP COLUMN categoria
 CREATE TABLE GRUPO(
 	id INT NOT NULL,
 	id_admin VARCHAR(20) NOT NULL,

@@ -1,5 +1,42 @@
 
 /*PROCEDIMIENTOS ALMACENADOS REQUERIDOS PARA USUARIOS*/
+/*CREAR ACTIVIDAD*/
+CREATE PROCEDURE sp_crear_actividad
+@id INT,
+@id_reto INT,
+@id_usuario VARCHAR(20),
+@hora_inicio TIME,
+@hora_fin TIME,
+@tipo_actividad varchar(20),
+@kilometraje INT, 
+@fecha DATE,
+@recorrido XML
+AS
+BEGIN
+INSERT INTO straviadb.dbo.ACTIVIDAD
+(id,id_reto,id_usuario,hora_inicio,hora_fin ,
+tipo_actividad ,kilometraje,fecha,recorrido) 
+VALUES
+(@id,@id_reto,@id_usuario,@hora_inicio,@hora_fin,
+@tipo_actividad,@kilometraje,@fecha,@recorrido
+)
+END;
+
+/*CREAR CARRERA*/
+CREATE PROCEDURE sp_crear_carrera
+@_id INT,
+@_id_actividad VARCHAR(20),
+@nombre	VARCHAR(20),
+@_fecha DATE,
+@_costo DECIMAL(10,2)
+AS
+BEGIN
+INSERT INTO straviadb.dbo.CARRERA
+(id, id_actividad, nombre, fecha, costo
+) VALUES
+(
+@_id, @_id_actividad, @nombre,@_fecha, @_costo)
+END;
 
 /*CREAR ROLES*/
 CREATE PROCEDURE sp_crear_rol
@@ -59,7 +96,7 @@ EXEC sp_insertar_usuario 'jordan23', 2,NULL,'Michael', 'Jeffrey',
 EXEC sp_insertar_usuario 'lebron23', 2,NULL,'LeBron', 'Raymone',
 'James',NULL, 'Estadounidense', '1984-12-30', '1234567palomitas';
 
-SELECT * FROM straviadb.dbo.USUARIO;
+
 /*CONSULTA PARA OBTENER USUARIO POR PRIMARY KEY*/
 CREATE PROCEDURE sp_consultar_usuario
 @usuario_id VARCHAR(20)
@@ -68,6 +105,14 @@ SELECT * FROM straviadb.dbo.USUARIO
 WHERE usuario=@usuario_id;
 
 EXEC sp_consultar_usuario 'lebron23';
+
+
+/*CONSULTA PARA OBTENER TODOS LOS USUARIOS*/
+CREATE PROCEDURE sp_consultar_usuarios
+AS BEGIN
+SELECT * FROM straviadb.dbo.USUARIO
+END;
+EXEC sp_consultar_usuarios;
 
 /*CONSULTA PARA OBTENER EDAD DE USUARIOS*/
 
@@ -106,7 +151,6 @@ CREATE PROCEDURE sp_actualizar_carrera
 AS
 UPDATE straviadb.dbo.USUARIO SET id_carrera = @_idcarrera
 WHERE usuario= @nombreusuario;
-
 ------ACTUALIZAR ROL------
 CREATE PROCEDURE sp_actualizar_rol
 @nombreusuario VARCHAR(20),
@@ -121,4 +165,14 @@ CREATE PROCEDURE sp_actualizar_password
 AS
 UPDATE straviadb.dbo.USUARIO SET _password = @_pwd
 WHERE usuario= @nombreusuario;
+------ELIMINAR USUARIO------
+CREATE PROCEDURE sp_eliminar_usuario
+@nombreusuario VARCHAR(20)
+AS
+BEGIN
+DELETE FROM straviadb.dbo.USUARIO 
+WHERE usuario=@nombreusuario
+END;
+
+
 
