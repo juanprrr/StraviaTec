@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ChallengesComponent } from './challenges/challenges.component';
 import { ExploreComponent } from './explore/explore.component';
 import { TrainingComponent } from './training/training.component';
+import { CrearActividadComponent } from './inicio/crear-actividad/crear-actividad.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { TrainingComponent } from './training/training.component';
     NavbarComponent,
     ChallengesComponent,
     ExploreComponent,
-    TrainingComponent
+    TrainingComponent,
+    CrearActividadComponent
   ],
   imports: [
     CommonModule,
