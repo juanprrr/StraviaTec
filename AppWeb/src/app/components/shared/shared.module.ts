@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatCardModule } from '@angular/material/card'
+import { MatGridListModule } from '@angular/material/grid-list'
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -22,7 +25,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     MatToolbarModule,
     MatIconModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule
   ],
   exports: [
     MatSliderModule,
@@ -32,7 +38,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     MatToolbarModule,
     MatIconModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }
