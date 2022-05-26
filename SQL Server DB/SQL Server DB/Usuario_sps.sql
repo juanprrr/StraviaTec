@@ -1,5 +1,25 @@
 
 /*PROCEDIMIENTOS ALMACENADOS REQUERIDOS PARA USUARIOS*/
+
+/*CREAR RETO*/
+CREATE PROCEDURE sp_crear_reto
+@id INT, 
+@nombre VARCHAR(20),
+@fecha_inicio DATE ,
+@fecha_finaliza DATE ,
+@tipo_actividad VARCHAR(20),
+@tipo_reto VARCHAR(20)
+AS
+INSERT INTO straviadb.dbo.RETO
+(id, nombre, fecha_inicio, fecha_finaliza,
+tipo_actividad, tipo_reto
+) VALUES
+(
+@id, @nombre, @fecha_inicio, @fecha_finaliza,
+@tipo_actividad, @tipo_reto
+)
+
+
 /*CREAR ACTIVIDAD*/
 CREATE PROCEDURE sp_crear_actividad
 @id INT,
@@ -12,7 +32,6 @@ CREATE PROCEDURE sp_crear_actividad
 @fecha DATE,
 @recorrido XML
 AS
-BEGIN
 INSERT INTO straviadb.dbo.ACTIVIDAD
 (id,id_reto,id_usuario,hora_inicio,hora_fin ,
 tipo_actividad ,kilometraje,fecha,recorrido) 
@@ -20,7 +39,6 @@ VALUES
 (@id,@id_reto,@id_usuario,@hora_inicio,@hora_fin,
 @tipo_actividad,@kilometraje,@fecha,@recorrido
 )
-END;
 
 EXEC sp_crear_actividad 1, NULL, 'jordan23', '12:34:54.1', '12:39:54.1', 'Correr', 
 12, '2022-05-24', NULL;
