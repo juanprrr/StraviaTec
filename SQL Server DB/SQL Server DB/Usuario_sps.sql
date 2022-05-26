@@ -1,7 +1,7 @@
 
 /*PROCEDIMIENTOS ALMACENADOS REQUERIDOS PARA USUARIOS*/
 
-/*CREAR RETO*/
+-------------------------------/*CREAR RETO*/
 CREATE PROCEDURE sp_crear_reto
 @id INT, 
 @nombre VARCHAR(20),
@@ -18,9 +18,70 @@ tipo_actividad, tipo_reto
 @id, @nombre, @fecha_inicio, @fecha_finaliza,
 @tipo_actividad, @tipo_reto
 )
+EXEC sp_crear_reto 1, 'pseudomaraton', '2022-05-26','2022-05-31',
+'correr', 'fondo'
+EXEC sp_crear_reto 2, 'aguas abiertas', '2022-05-27','2022-05-30',
+'natacion', 'fondo'
+/*Obtener reto por id*/
+CREATE PROCEDURE sp_consultar_reto
+@id INT
+AS
+SELECT * FROM straviadb.dbo.RETO
+WHERE id=@id;
 
+EXEC sp_consultar_reto 2
 
-/*CREAR ACTIVIDAD*/
+/*Obtener todos los retos*/
+CREATE PROCEDURE sp_consultar_retos
+AS
+SELECT * FROM straviadb.dbo.RETO
+
+EXEC sp_consultar_retos
+
+/*ACTUALIZAR NOMBRE*/
+CREATE PROCEDURE sp_actualizar_nombre_reto
+@_id INT,
+@_nombre VARCHAR(20)
+AS
+UPDATE straviadb.dbo.RETO SET nombre = @_nombre
+WHERE id= @_id;
+/*ACTUALIZAR FECHA INICIO*/
+CREATE PROCEDURE sp_actualizar_fecha_inicio_reto
+@_id INT,
+@_fecha DATE
+AS
+UPDATE straviadb.dbo.RETO SET fecha_inicio = @_fecha
+WHERE id= @_id;
+/*ACTUALIZAR FECHA FINALIZA*/
+CREATE PROCEDURE sp_actualizar_fecha_fin_reto
+@_id INT,
+@_fecha DATE
+AS
+UPDATE straviadb.dbo.RETO SET fecha_finaliza = @_fecha
+WHERE id= @_id;
+/*ACTUALIZAR TIPO ACTIVIDAD*/
+CREATE PROCEDURE sp_actualizar_tipoacti_reto
+@_id INT,
+@_tipoactividad VARCHAR(20)
+AS
+UPDATE straviadb.dbo.RETO SET tipo_actividad = @_tipoactividad
+WHERE id= @_id;
+/*ACTUALIZAR TIPO RETO*/
+CREATE PROCEDURE sp_actualizar_tipo_reto
+@_id INT,
+@_tiporeto VARCHAR(20)
+AS
+UPDATE straviadb.dbo.RETO SET tipo_reto = @_tiporeto
+WHERE id= @_id;
+/*ELIMINAR RETO*/
+CREATE PROCEDURE sp_eliminar_reto
+@idreto INT
+AS
+DELETE FROM straviadb.dbo.RETO 
+WHERE id=@idreto
+
+EXEC sp_eliminar_reto 2
+-------------------------------/*CREAR ACTIVIDAD*/
 CREATE PROCEDURE sp_crear_actividad
 @id INT,
 @id_reto INT,
@@ -65,7 +126,7 @@ FROM straviadb.dbo.ACTIVIDAD
 WHERE id=@id_actividad
 EXEC sp_consultar_duracion 1
 
-/*CREAR CARRERA*/
+-------------------------------/*CREAR CARRERA*/
 CREATE PROCEDURE sp_crear_carrera
 @_id INT,
 @_id_actividad VARCHAR(20),
@@ -128,7 +189,7 @@ AS
 UPDATE straviadb.dbo.CARRERA SET costo = @_precio
 WHERE id= @_id;
 
-/*CREAR ROLES*/
+-------------------------------/*CREAR ROLES*/
 CREATE PROCEDURE sp_crear_rol
 @rol_id INT,
 @rol_nombre VARCHAR(10)
@@ -140,7 +201,7 @@ EXEC sp_crear_rol 2, 'deportista';
 SELECT * FROM straviadb.dbo.ROL;
 
 DROP PROCEDURE sp_insertar_usuario
-/*CREAR USUARIOS*/
+-------------------------------/*CREAR USUARIOS*/
 CREATE PROCEDURE sp_insertar_usuario
 @_usuario VARCHAR(20),
 @rol_usuario INT,
