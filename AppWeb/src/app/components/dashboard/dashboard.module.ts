@@ -12,6 +12,7 @@ import { TrainingComponent } from './training/training.component';
 import { CrearActividadComponent } from './inicio/crear-actividad/crear-actividad.component';
 
 
+
 @NgModule({
   declarations: [
     DashboardComponent,

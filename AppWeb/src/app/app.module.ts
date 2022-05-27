@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './components/shared/shared.module';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
+import { NavbarComponent } from './components/dashboardAdmin/navbar/navbar.component';
 
 // Angular Material
 
@@ -19,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LoginComponent,
     RegistroComponent,
+    DashboardAdminComponent,
+    NavbarComponent,
 
   ],
   imports: [
