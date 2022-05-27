@@ -45,6 +45,28 @@ CREATE PROCEDURE sp_eliminar_grupo
 AS
 DELETE FROM straviadb.dbo.GRUPO 
 WHERE id=@idgrupo;
+-------------------------------/*CREAR CATEGORÍAS*/
+CREATE PROCEDURE sp_crear_categorias
+@id_carrera INT, 
+@descripcion VARCHAR(40),
+@nombre VARCHAR(20)
+AS
+INSERT INTO straviadb.dbo.CATEGORIAS
+(nombre, id_carrera,descripcion) VALUES
+(
+@nombre,@id_carrera, @descripcion
+);
+/*CONSULTAR CATEGORÍA POR NOMBRE*/
+CREATE PROCEDURE sp_consultar_categoria
+@nombre VARCHAR(20)
+AS
+SELECT * FROM straviadb.dbo.CATEGORIAS
+WHERE nombre=@nombre
+
+/*CONSULTAR CATEGORÍAS*/
+CREATE PROCEDURE sp_consultar_categorias
+AS
+SELECT * FROM straviadb.dbo.CATEGORIAS
 
 -------------------------------/*CREAR RETO*/
 CREATE PROCEDURE sp_crear_reto
