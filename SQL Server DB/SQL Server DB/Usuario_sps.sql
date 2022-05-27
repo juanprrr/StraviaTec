@@ -1,5 +1,50 @@
 
 /*PROCEDIMIENTOS ALMACENADOS REQUERIDOS PARA USUARIOS*/
+-------------------------------/*CREAR GRUPO*/
+CREATE PROCEDURE sp_crear_grupo
+@id INT, 
+@admin VARCHAR(20),
+@nombre VARCHAR(20)
+AS
+INSERT INTO straviadb.dbo.GRUPO
+(id, id_admin,nombre) VALUES
+(
+@id, @admin, @nombre
+);
+
+/*CONSULTAR GRUPO POR ID*/
+CREATE PROCEDURE sp_consultar_grupo
+@id INT
+AS
+SELECT * FROM straviadb.dbo.GRUPO
+WHERE id=@id;
+
+/*CONSULTAR GRUPOS*/
+CREATE PROCEDURE sp_consultar_grupos
+AS
+SELECT * FROM straviadb.dbo.GRUPO
+
+/*MODIFICAR NOMBRE DE GRUPO*/
+CREATE PROCEDURE sp_actualizar_nombreGrupo
+@nombre VARCHAR(20),
+@idGrupo INT
+AS
+UPDATE straviadb.dbo.GRUPO SET nombre = @nombre
+WHERE id= @idGrupo;
+/*MODIFICAR ADMIN DE GRUPO*/
+CREATE PROCEDURE sp_actualizar_adminGrupo
+@nombreusuario VARCHAR(20),
+@idGrupo INT
+AS
+UPDATE straviadb.dbo.GRUPO SET id_admin = @nombreusuario
+WHERE id= @idGrupo;
+
+/*ELIMINAR GRUPO*/
+CREATE PROCEDURE sp_eliminar_grupo
+@idgrupo INT
+AS
+DELETE FROM straviadb.dbo.GRUPO 
+WHERE id=@idgrupo;
 
 -------------------------------/*CREAR RETO*/
 CREATE PROCEDURE sp_crear_reto
