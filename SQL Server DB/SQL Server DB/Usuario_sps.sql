@@ -256,6 +256,64 @@ AS
 UPDATE straviadb.dbo.CARRERA SET costo = @_precio
 WHERE id= @_id;
 
+-------------------------------/*CREAR CUENTA BANCARIA*/
+
+CREATE PROCEDURE sp_crear_cuenta_bancaria
+@id INT, --- id de la carrera a la que está asociada
+@no_cuenta VARCHAR(30)
+AS
+INSERT INTO straviadb.dbo.CUENTA_BANCARIA
+(id, cuenta) VALUES (@id, @no_cuenta);
+
+/*CONSULTAR CUENTA POR ID*/
+CREATE PROCEDURE sp_consultar_cuenta_bancaria
+@id INT
+AS
+SELECT * FROM straviadb.dbo.CUENTA_BANCARIA
+WHERE id=@id
+/*CONSULTAR CUENTAS*/
+CREATE PROCEDURE sp_consultar_cuentas_bancarias
+AS
+SELECT * FROM straviadb.dbo.CUENTA_BANCARIA
+-------------------------------/*CREAR PAGO DE CARRERA*/
+CREATE PROCEDURE sp_crear_pagocarreras
+@id_carrera INT,
+@codigo INT,
+@estado VARCHAR(10)
+AS 
+INSERT INTO straviadb.dbo.PAGOCARRERA
+(id_carrera, codigo, estado) VALUES 
+(@id_carrera, @codigo, @estado);
+
+/*CONSULTAR PAGO DE CARRERA POR ID DE CARRERA*/
+CREATE PROCEDURE sp_consultar_pago_carrera
+@id_carrera INT
+AS
+SELECT * FROM straviadb.dbo.PAGOCARRERA
+WHERE id_carrera=@id_carrera
+
+/*CONSULTAR PAGOS DE CARRERAS*/
+CREATE PROCEDURE sp_consultar_pagos_carreras
+AS
+SELECT * FROM straviadb.dbo.PAGOCARRERA
+
+-------------------------------/*CREAR GRUPO_VE_CARRERA*/
+CREATE PROCEDURE sp_crear_grupo_ve_carrera
+@id_carrera INT,
+@grupo INT
+AS 
+INSERT INTO straviadb.dbo.GRUPO_VE_CARRERA
+(id_carrera, id_grupo) VALUES 
+(@id_carrera,@grupo);
+
+/*CONSULTAR GRUPOS VISIBLES DE UNA CARRERA*/
+
+CREATE PROCEDURE sp_consultar_grupos_ven_carrera
+@id_carrera INT
+AS
+SELECT nombre, id_admin  FROM straviadb.dbo.GRUPO as G
+JOIN straviadb.dbo.GRUPO_VE_CARRERA AS GVC ON GVC.id_grupo= G.id
+WHERE GVC.id_carrera =@id_carrera;
 -------------------------------/*CREAR ROLES*/
 CREATE PROCEDURE sp_crear_rol
 @rol_id INT,
