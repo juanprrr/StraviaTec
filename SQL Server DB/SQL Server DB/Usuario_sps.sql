@@ -460,4 +460,55 @@ END;
 --EXEC sp_eliminar_usuario 'jordan23'
 --EXEC sp_consultar_usuarios
 
+-------------------------------/*CREAR USUARIO_EN_GRUPO*/
+CREATE PROCEDURE sp_crear_usuario_en_grupo
+@id_usuario VARCHAR(20),
+@id_grupo INT
+AS
+INSERT INTO straviadb.dbo.USUARIO_EN_GRUPO
+(id_usuario, id_grupo) VALUES
+(@id_usuario, @id_grupo);
+/*CONSULTAR USUARIOS DE UN GRUPO*/
+CREATE PROCEDURE sp_consultar_usuarios_en_grupo 
+@id_grupo INT
+AS
+SELECT nombre, apellido1, apellido2 FROM straviadb.dbo.USUARIO AS U
+JOIN straviadb.dbo.USUARIO_EN_GRUPO AS UEG
+ON UEG.id_usuario = U.usuario
+WHERE UEG.id_grupo = @id_grupo
 
+
+-------------------------------/*CREAR USUARIO_EN_RETO*/
+CREATE PROCEDURE sp_crear_usuario_en_reto
+@id_usuario VARCHAR(20),
+@id_reto INT
+AS
+INSERT INTO straviadb.dbo.USUARIO_EN_RETO
+(id_usuario, id_reto) VALUES
+(@id_usuario, @id_reto);
+
+/*CONSULTAR USUARIOS DE UN RETO*/
+CREATE PROCEDURE sp_consultar_usuarios_en_reto
+@id_reto INT
+AS
+SELECT nombre, apellido1, apellido2 FROM straviadb.dbo.USUARIO AS U
+JOIN straviadb.dbo.USUARIO_EN_RETO AS UEG
+ON UEG.id_usuario = U.usuario
+WHERE UEG.id_reto = @id_reto
+-------------------------------/*CREAR USUARIO_SIGUE_USUARIO*/
+CREATE PROCEDURE sp_crear_usuario_sigue_usuario
+@id_usuario VARCHAR(20),
+@id_seguido VARCHAR(20)
+AS
+INSERT INTO straviadb.dbo.USUARIO_SIGUE_USUARIO
+(id_user, user_sigue) VALUES
+(@id_usuario, @id_seguido);
+
+/*CONSULTAR SEGUIDOS POR UN USUARIO*/
+CREATE PROCEDURE sp_consultar_seguidos_x_usuario
+@id_usuario VARCHAR(20)
+AS
+SELECT usuario ,nombre, apellido1, apellido2 FROM straviadb.dbo.USUARIO AS U
+JOIN straviadb.dbo.USUARIO_SIGUE_USUARIO AS USU
+ON USU.user_sigue = U.usuario
+WHERE USU.id_user = @id_usuario
