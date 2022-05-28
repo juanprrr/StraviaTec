@@ -32,6 +32,19 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
+  ingresarAdmin() {
+    const usuario = this.form.value.usuario;
+    const password = this.form.value.password;
+    if(usuario == 'EM' && password == 'em'){
+      this.router.navigateByUrl('/dashboard-admin');
+    }else{
+      this.error()
+    }
+  }
+
+  
+
   registrar() {
     this.router.navigateByUrl('/registro');
   }
