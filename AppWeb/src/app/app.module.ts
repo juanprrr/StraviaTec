@@ -12,6 +12,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
 import { NavbarComponent } from './components/dashboardAdmin/navbar/navbar.component';
+import { RegistroCarreraComponent } from './components/dashboardAdmin/registro-carrera/registro-carrera.component';
 
 // Angular Material
 
@@ -23,6 +24,7 @@ import { NavbarComponent } from './components/dashboardAdmin/navbar/navbar.compo
     RegistroComponent,
     DashboardAdminComponent,
     NavbarComponent,
+    RegistroCarreraComponent,
 
   ],
   imports: [
