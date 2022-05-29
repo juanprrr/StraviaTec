@@ -1,3 +1,49 @@
+-------------------------------/*CREAR PATROCINADOR*/
+
+CREATE PROCEDURE sp_crear_patrocinador
+@id INT,
+@nombre_rep VARCHAR(15),
+@apellido1_rep VARCHAR(15),
+@apellido2_rep VARCHAR(15),
+@nombrecomercial VARCHAR(30),
+@telefono VARCHAR(15),
+@logo IMAGE
+AS 
+INSERT INTO straviadb.dbo.PATROCINADOR
+(id, nombre_rep, apellido1_rep, apellido2_rep, 
+nombre_comercial, telefono_representante, logo)
+VALUES
+(@id, @nombre_rep, @apellido1_rep, @apellido2_rep,
+@nombrecomercial, @telefono, @logo);
+
+/*CONSULTAR PATROCINADOR POR ID*/
+CREATE PROCEDURE sp_consultar_patrocinador
+@id_patron INT
+AS
+SELECT * FROM straviadb.dbo.PATROCINADOR
+WHERE id = @id_patron;
+
+/*CONSULTAR LISTA DE PATROCINADORES*/
+CREATE PROCEDURE sp_consultar_patrocinadores
+AS
+SELECT * FROM straviadb.dbo.PATROCINADOR
+
+-------------------------------/*CREAR PATROCINA CARRERA*/
+CREATE PROCEDURE sp_crear_patrocina_carrera
+@id_patron INT,
+@id_carrera INT
+AS 
+INSERT INTO straviadb.dbo.PATROCINA_CARRERA
+(id_patron, id_carrera) VALUES 
+(@id_patron,@id_carrera);
+
+/*CONSULTAR PATROCINADORES DE CARRERA*/
+CREATE PROCEDURE sp_consultar_patrocinadores_x_carrera
+@id_carrera INT
+AS
+SELECT *  FROM straviadb.dbo.PATROCINADOR as G
+JOIN straviadb.dbo.PATROCINA_CARRERA AS GVR ON GVR.id_patron= G.id
+WHERE GVR.id_carrera =@id_carrera;
 
 /*PROCEDIMIENTOS ALMACENADOS REQUERIDOS PARA USUARIOS*/
 -------------------------------/*CREAR GRUPO*/
@@ -148,6 +194,26 @@ DELETE FROM straviadb.dbo.RETO
 WHERE id=@idreto
 
 EXEC sp_eliminar_reto 2
+
+-------------------------------/*CREAR GRUPO_VE_RETO*/
+CREATE PROCEDURE sp_crear_grupo_ve_reto
+@id_reto INT,
+@grupo INT
+AS 
+INSERT INTO straviadb.dbo.GRUPO_VE_RETO
+(id_reto, id_grupo) VALUES 
+(@id_reto,@grupo);
+
+/*CONSULTAR GRUPOS VISIBLES DE UN RETO*/
+
+CREATE PROCEDURE sp_consultar_grupos_ven_reto
+@id_reto INT
+AS
+SELECT nombre, id_admin  FROM straviadb.dbo.GRUPO as G
+JOIN straviadb.dbo.GRUPO_VE_RETO AS GVR ON GVR.id_grupo= G.id
+WHERE GVR.id_reto =@id_reto;
+
+
 -------------------------------/*CREAR ACTIVIDAD*/
 CREATE PROCEDURE sp_crear_actividad
 @id INT,
