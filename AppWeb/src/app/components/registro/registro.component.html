@@ -13,7 +13,7 @@
                     [rowspan]="1">
                     <mat-form-field class="ancho">
                         <mat-label>Nombre</mat-label>
-                        <input matInput autocomplete="off">
+                        <input matInput autocomplete="off" [(ngModel)]="newUser.nombre" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile
@@ -21,7 +21,7 @@
                     [rowspan]="1">
                     <mat-form-field class="ancho">
                         <mat-label>Primer apellido</mat-label>
-                        <input matInput autocomplete="off">
+                        <input matInput autocomplete="off" [(ngModel)]="newUser.apellido1" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile
@@ -29,7 +29,7 @@
                     [rowspan]="1">
                     <mat-form-field class="ancho">
                         <mat-label>Segundo apellido</mat-label>
-                        <input matInput autocomplete="off">
+                        <input matInput autocomplete="off" [(ngModel)]="newUser.apellido2" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile
@@ -37,7 +37,7 @@
                     [rowspan]="1">
                     <mat-form-field class="ancho">
                         <mat-label>Fecha de nacimiento</mat-label>
-                        <input matInput autocomplete="off">
+                        <input type="date" matInput autocomplete="off" [(ngModel)]="newUser.fecha_nacimiento" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile
@@ -45,7 +45,7 @@
                     [rowspan]="1">
                     <mat-form-field class="ancho">
                         <mat-label>Nacionalidad</mat-label>
-                        <input matInput autocomplete="off">
+                        <input matInput autocomplete="off" [(ngModel)]="newUser.nacionalidad" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile
@@ -53,7 +53,7 @@
                     [rowspan]="1">
                     <mat-form-field class="ancho">
                         <mat-label>Usuario</mat-label>
-                        <input matInput autocomplete="off">
+                        <input matInput autocomplete="off" [(ngModel)]="newUser.usuario" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile
@@ -61,14 +61,14 @@
                     [rowspan]="1">
                     <mat-form-field class="ancho">
                         <mat-label>Contraseña</mat-label>
-                        <input matInput autocomplete="off">
+                        <input type="password" matInput autocomplete="off" [(ngModel)]="newUser._password" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile
                     [colspan]="1"
                     [rowspan]="1">
                     <button mat-raised-button style="margin-right: 10px" routerLink="/login">Regresar</button>
-                    <button mat-raised-button color="primary">Postear</button>
+                    <button mat-raised-button color="primary" (click)="addUser(newUser)">Registrarse</button>
                 </mat-grid-tile>
             </mat-grid-list>    
         </form>
