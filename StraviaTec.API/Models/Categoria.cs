@@ -5,7 +5,8 @@ namespace StraviaTec.API.Models
     public class Categoria
     {
         [Key]
-        public int codigo { get; set; }
-        public string tipo { get; set; }
+        public int nombre { get; set; }
+        public string descripcion { get; set; }
+        public int id_carrera { get; set; }
     }
 }
