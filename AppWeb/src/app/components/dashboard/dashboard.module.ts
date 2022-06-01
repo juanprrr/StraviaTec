@@ -10,6 +10,7 @@ import { ChallengesComponent } from './challenges/challenges.component';
 import { ExploreComponent } from './explore/explore.component';
 import { TrainingComponent } from './training/training.component';
 import { CrearActividadComponent } from './inicio/crear-actividad/crear-actividad.component';
+import { ConfirmDialogComponent } from './training/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -21,7 +22,8 @@ import { CrearActividadComponent } from './inicio/crear-actividad/crear-activida
     ChallengesComponent,
     ExploreComponent,
     TrainingComponent,
-    CrearActividadComponent
+    CrearActividadComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

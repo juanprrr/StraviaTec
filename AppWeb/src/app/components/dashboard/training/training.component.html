@@ -1,6 +1,6 @@
 <div class="container">
     <mat-toolbar>
-      <span>@anthony09</span>
+      <span>@{{currentUser.usuario}}</span>
     </mat-toolbar>
     <mat-card style="margin-top: 10px">
       <form>
@@ -9,15 +9,17 @@
                     [colspan]="2"
                     [rowspan]="3"
                     [style.background]="'lightgray'">
-                    <img src="../../../assets/img/logo.png">
+                    <img *ngIf="previsualization" width="200px" [src]="previsualization">
+                    <!--mat-icon aria-hidden="false" aria-label="Example home icon">person</mat-icon-->
                 </mat-grid-tile>
                 <mat-grid-tile
                     [colspan]="1"
                     [rowspan]="1">
-                    <button mat-raised-button color="primary">
+                    <button mat-raised-button color="primary" (click)="openDialog()">
                       <mat-label>Editar </mat-label>
                       <mat-icon aria-hidden="false" aria-label="Example home icon">mode</mat-icon>
                     </button>
+                    <!--input (change)="getFile($event)" type="file"-->
               </mat-grid-tile>
               <mat-grid-tile
                   [colspan]="5"

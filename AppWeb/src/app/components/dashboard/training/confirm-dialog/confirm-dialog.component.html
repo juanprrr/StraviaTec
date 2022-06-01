@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <p>¿Quieres cambiar tu foto de perfil?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite Animal</mat-label>
+    <!--input matInput [(ngModel)]="data.animal"-->
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No, gracias!</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+</div>

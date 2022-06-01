@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearActividadComponent implements OnInit {
   foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
+    {value: 'Correr', viewValue: 'Correr'},
+    {value: 'Natación', viewValue: 'Natación'},
+    {value: 'Ciclismo', viewValue: 'Ciclismo'},
+    {value: 'Senderismo', viewValue: 'Senderismo'},
+    {value: 'Kayak', viewValue: 'Kayak'},
+    {value: 'Caminata', viewValue: 'Caminata'}
   ];
 
   constructor() { }

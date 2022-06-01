@@ -11,6 +11,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FriendsComponent } from './components/dashboard/training/friends/friends.component';
+import { ConfirmDialogComponent } from './components/dashboard/training/confirm-dialog/confirm-dialog.component';
 
 
 // Angular Material
@@ -31,6 +32,7 @@ import { FriendsComponent } from './components/dashboard/training/friends/friend
     ReactiveFormsModule,
     FormsModule
   ],
+  entryComponents: [ConfirmDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
