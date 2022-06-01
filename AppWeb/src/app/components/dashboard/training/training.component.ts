@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/Models/usuario';
+import { UsuarioService } from 'src/app/Services/usuario.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-training',
@@ -6,16 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./training.component.css']
 })
 export class TrainingComponent implements OnInit {
-  tiles: any[] = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
-
-  constructor() { }
+  currentUser:Usuario = new Usuario
+  CurrentDate = new Date()
+  years:number | undefined
+  
+  constructor(private userService:UsuarioService) { }
 
   ngOnInit(): void {
+    this.loadCurrentUser();
   }
 
+  loadCurrentUser() {
+    this.currentUser = this.userService.getCurrentUser()
+
+    this.years =  moment(this.CurrentDate).diff(moment(this.currentUser.fecha_nacimiento), 'years')
+  }
 }

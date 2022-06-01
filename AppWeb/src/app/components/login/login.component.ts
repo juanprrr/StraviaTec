@@ -27,6 +27,10 @@ export class LoginComponent implements OnInit {
     this.userService.getUsers().subscribe((data:any)=>{this.usersList = data})
   }
 
+  userLogged(){
+    console.log(this.form)
+  }
+
   goToPage(pageName:string){
     this.router.navigate([`${pageName}`]);
   }
@@ -38,6 +42,7 @@ export class LoginComponent implements OnInit {
       if (usuario == this.usersList[i].usuario && password == this.usersList[i]._password && this.usersList[i].id_rol == 2) {
         this.goToPage('/dashboard')
         this.logged = true
+        this.userService.setCurrentUser(this.usersList[i])
       }
     }
     if (!this.logged){

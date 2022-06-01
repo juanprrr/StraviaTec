@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -30,7 +31,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule
   ],
   exports: [
     MatSliderModule,
@@ -44,7 +46,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule
   ]
 })
 export class SharedModule { }

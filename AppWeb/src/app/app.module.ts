@@ -10,18 +10,17 @@ import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './components/shared/shared.module';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FriendsComponent } from './components/dashboard/training/friends/friends.component';
 
 
 // Angular Material
-
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistroComponent,
-    
+    FriendsComponent,
   ],
   imports: [
     BrowserModule,

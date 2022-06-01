@@ -8,7 +8,18 @@ import { Usuario } from '../Models/usuario';
 })
 export class UsuarioService {
   url = '/api/Usuario';
+
+  currentUser:Usuario = new Usuario
+
   constructor(private httpclient:HttpClient) { }
+
+  getCurrentUser(){
+    return this.currentUser
+  }
+
+  setCurrentUser(user:Usuario) {
+    this.currentUser = user
+  }
 
   //GetUsers
   getUsers():Observable<any>{

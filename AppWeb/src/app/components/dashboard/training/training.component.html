@@ -4,11 +4,11 @@
     </mat-toolbar>
     <mat-card style="margin-top: 10px">
       <form>
-          <mat-grid-list cols="7" rowHeight="50px">
+          <mat-grid-list cols="8" rowHeight="70px">
               <mat-grid-tile
                     [colspan]="2"
                     [rowspan]="3"
-                    [style.background]="'lightgreen'">
+                    [style.background]="'lightgray'">
                     <img src="../../../assets/img/logo.png">
                 </mat-grid-tile>
                 <mat-grid-tile
@@ -20,18 +20,18 @@
                     </button>
               </mat-grid-tile>
               <mat-grid-tile
-                  [colspan]="4"
+                  [colspan]="5"
                   [rowspan]="1">
-                  <mat-label><b>Anthony Montero Roman</b></mat-label>
+                  <mat-label><h1><b>{{currentUser.nombre}} {{currentUser.apellido1}} {{currentUser.apellido2}}</b></h1></mat-label>
               </mat-grid-tile>
               <mat-grid-tile
                   [colspan]="1"
                   [rowspan]="2">
               </mat-grid-tile>
               <mat-grid-tile
-                  [colspan]="4"
+                  [colspan]="5"
                   [rowspan]="2">
-                  <button mat-raised-button color="primary">
+                  <button mat-raised-button color="primary" routerLink="/dashboard/friends">
                     <mat-label>Amigos </mat-label>
                     <mat-icon aria-hidden="false" aria-label="Example home icon">people</mat-icon>
                   </button>
@@ -39,12 +39,12 @@
               <mat-grid-tile
                   [colspan]="1"
                   [rowspan]="1">
-                  <mat-label><b>Costarricense</b></mat-label>
+                  <mat-label><b>{{currentUser.nacionalidad}}</b></mat-label>
               </mat-grid-tile>
               <mat-grid-tile
                   [colspan]="1"
                   [rowspan]="1">
-                  <mat-label><b>23 años</b></mat-label>
+                  <mat-label><b>{{years}} años</b></mat-label>
               </mat-grid-tile>
           </mat-grid-list>
           <mat-divider></mat-divider>
