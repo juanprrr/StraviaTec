@@ -1,11 +1,21 @@
+<h2 mat-dialog-title>¿Quieres cambiar tu foto de perfil?</h2>
 <div mat-dialog-content>
-  <p>¿Quieres cambiar tu foto de perfil?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <!--input matInput [(ngModel)]="data.animal"-->
-  </mat-form-field>
+  <mat-grid-list cols="1" rowHeight="20px">
+    <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="10"
+      [style.background]="'lightgray'">
+      <img *ngIf="previsualization" width="200px" [src]="previsualization">
+      <!--mat-icon aria-hidden="false" aria-label="Example home icon">person</mat-icon-->
+    </mat-grid-tile>
+    <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="3">
+      <input type="file" (change)="getFile($event)">
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No, gracias!</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" color="primary" cdkFocusInitial (click)="uploadFile()">Subir</button>
 </div>
