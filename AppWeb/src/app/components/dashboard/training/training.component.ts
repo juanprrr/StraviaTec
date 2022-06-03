@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ActividadService } from 'src/app/Services/actividad.service';
+import { Actividad } from 'src/app/Models/actividad';
 
 @Component({
   selector: 'app-training',
@@ -18,11 +20,15 @@ export class TrainingComponent implements OnInit {
   public filesList:any = []
   public previsualization:string | undefined
   animal: string | undefined;
+  listActivities:Actividad [] = []
   
-  constructor(private userService:UsuarioService, public matDialog: MatDialog) { }
+  constructor(private userService:UsuarioService, public matDialog: MatDialog, private activityService:ActividadService) { }
 
   ngOnInit(): void {
     this.loadCurrentUser();
+    this.activityService.getActivities().subscribe((res: any)=>{
+      this.listActivities = res
+    })
   }
 
   openDialog(): void {
