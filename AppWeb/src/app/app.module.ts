@@ -21,7 +21,7 @@ import { ConfirmDialogComponent } from './components/dashboard/training/confirm-
     AppComponent,
     LoginComponent,
     RegistroComponent,
-    FriendsComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

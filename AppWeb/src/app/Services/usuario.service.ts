@@ -27,7 +27,7 @@ export class UsuarioService {
   }
   //GetUserbyId
   getUserbyId(Id:string):Observable<Usuario>{
-    let params = new HttpParams().set('id', Id)
+    let params = new HttpParams().set('usuario', Id)
     return this.httpclient.get<Usuario>(this.url, {params:params})
   }
   //PostUser
