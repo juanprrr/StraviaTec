@@ -237,7 +237,11 @@ VALUES
 EXEC sp_crear_actividad 1, NULL, 'jordan23', '12:34:54.1', '12:39:54.1', 'Correr', 
 12, '2022-05-24', NULL;
 EXEC sp_crear_actividad 2, NULL, 'jordan23', '5:34:54.1', '5:39:54.1', 'Natación', 
-1, '2022-05-24', NULL;
+1, '2022-06-24', NULL;
+EXEC sp_crear_actividad 3, NULL, 'lebron23', '5:34:54.1', '5:39:54.1', 'Correr', 
+1, '2022-06-25', NULL;
+EXEC sp_crear_actividad 4, NULL, 'lebron23', '5:34:54.1', '5:39:54.1', 'Kayak', 
+1, '2022-06-26', NULL;
 SELECT * FROM straviadb.dbo.ACTIVIDAD
 /*OBTENER ACTIVIDAD POR USUARIO*/
 CREATE PROCEDURE sp_consultar_actividad_usuario
@@ -246,7 +250,23 @@ AS
 SELECT * FROM straviadb.dbo.ACTIVIDAD
 WHERE id_usuario=@usuario_id;
 
+CREATE PROCEDURE sp_consultar_grupos_ven_carrera
+@id_carrera INT
+AS
+SELECT nombre, id_admin  FROM straviadb.dbo.GRUPO as G
+JOIN straviadb.dbo.GRUPO_VE_CARRERA AS GVC ON GVC.id_grupo= G.id
+WHERE GVC.id_carrera =@id_carrera;
+
 /*OBTENER ACTIVIDAD DE AMIGOS DEL USUARIO*/
+CREATE PROCEDURE sp_consultar_actividad_amigos
+@usuario VARCHAR (20)
+AS
+SELECT * FROM straviadb.dbo.ACTIVIDAD AS ACT
+JOIN straviadb.dbo.USUARIO_SIGUE_USUARIO AS USU
+ON USU.user_sigue = ACT.id_usuario
+WHERE USU.id_user = @usuario
+
+EXEC sp_consultar_actividad_amigos "juancho23";
 
 /*OBTENER LA DURACIÓN DE UNA ACTIVIDAD*/
 CREATE PROCEDURE sp_consultar_duracion
@@ -570,6 +590,8 @@ INSERT INTO straviadb.dbo.USUARIO_SIGUE_USUARIO
 (id_user, user_sigue) VALUES
 (@id_usuario, @id_seguido);
 
+EXEC sp_crear_usuario_sigue_usuario "juancho23", "jordan23";
+EXEC sp_crear_usuario_sigue_usuario "juancho23", lebron23;
 /*CONSULTAR SEGUIDOS POR UN USUARIO*/
 CREATE PROCEDURE sp_consultar_seguidos_x_usuario
 @id_usuario VARCHAR(20)
@@ -578,3 +600,7 @@ SELECT usuario ,nombre, apellido1, apellido2 FROM straviadb.dbo.USUARIO AS U
 JOIN straviadb.dbo.USUARIO_SIGUE_USUARIO AS USU
 ON USU.user_sigue = U.usuario
 WHERE USU.id_user = @id_usuario
+
+exec sp_consultar_usuarios;
+select * from straviadb.dbo.ACTIVIDAD;
+exec sp_consultar_seguidos_x_usuario "juancho23";
