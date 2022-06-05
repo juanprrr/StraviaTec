@@ -52,7 +52,7 @@ CREATE PROCEDURE sp_crear_grupo
 @admin VARCHAR(20),
 @nombre VARCHAR(20)
 AS
-INSERT INTO straviadb.dbo.GRUPO
+INSERT INTO GRUPO
 (id, id_admin,nombre) VALUES
 (
 @id, @admin, @nombre
@@ -85,8 +85,11 @@ WHERE id=@id
 CREATE PROCEDURE sp_eliminar_grupo
 @idgrupo INT
 AS
-DELETE FROM straviadb.dbo.GRUPO 
+DELETE FROM USUARIO_EN_GRUPO WHERE
+id_grupo = @idgrupo
+DELETE FROM GRUPO 
 WHERE id=@idgrupo;
+
 -------------------------------/*CREAR CATEGORÍAS*/
 CREATE PROCEDURE sp_crear_categorias
 @id_carrera INT, 
@@ -505,18 +508,18 @@ CREATE PROCEDURE sp_crear_usuario_en_grupo
 @id_usuario VARCHAR(20),
 @id_grupo INT
 AS
-INSERT INTO straviadb.dbo.USUARIO_EN_GRUPO
+INSERT INTO USUARIO_EN_GRUPO
 (id_usuario, id_grupo) VALUES
 (@id_usuario, @id_grupo);
+
 /*CONSULTAR USUARIOS DE UN GRUPO*/
 CREATE PROCEDURE sp_consultar_usuarios_en_grupo 
 @id_grupo INT
 AS
-SELECT nombre, apellido1, apellido2 FROM straviadb.dbo.USUARIO AS U
-JOIN straviadb.dbo.USUARIO_EN_GRUPO AS UEG
+SELECT nombre, apellido1, apellido2 FROM USUARIO AS U
+JOIN USUARIO_EN_GRUPO AS UEG
 ON UEG.id_usuario = U.usuario
 WHERE UEG.id_grupo = @id_grupo
-
 
 -------------------------------/*CREAR USUARIO_EN_RETO*/
 CREATE PROCEDURE sp_crear_usuario_en_reto
