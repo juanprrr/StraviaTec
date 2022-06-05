@@ -19,9 +19,9 @@
                 <mat-grid-tile
                   [colspan]="6"
                   [rowspan]="2">
-                  <button mat-raised-button color="primary" routerLink="/dashboard/friends">
-                    <mat-label>Seguir </mat-label>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">group_add</mat-icon>
+                  <button mat-raised-button color="{{buttonColor}}" (click)="followUser()">
+                    <mat-label>{{buttonName}} </mat-label>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">{{iconName}}</mat-icon>
                   </button>
                 </mat-grid-tile>
                 <mat-grid-tile

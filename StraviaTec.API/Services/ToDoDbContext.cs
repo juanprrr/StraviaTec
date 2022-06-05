@@ -19,6 +19,8 @@ namespace StraviaTec.API.Services
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PagoCarrera>().HasKey(c => new { c.codigo, c.id_carrera });
+            modelBuilder.Entity<Usuario_Sigue_Usuario>().HasKey(c => new { c.id_user, c.user_sigue });
         }
+        public DbSet<StraviaTec.API.Models.Usuario_Sigue_Usuario> Usuario_Sigue_Usuario { get; set; }
     }
 }
