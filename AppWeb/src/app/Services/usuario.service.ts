@@ -10,6 +10,7 @@ export class UsuarioService {
   url = '/api/Usuario';
 
   currentUser:Usuario = new Usuario
+  viewedUser:Usuario = new Usuario
 
   constructor(private httpclient:HttpClient) { }
 
@@ -19,6 +20,14 @@ export class UsuarioService {
 
   setCurrentUser(user:Usuario) {
     this.currentUser = user
+  }
+
+  getViewedUser(){
+    return this.viewedUser
+  }
+
+  setViewedUser(user:Usuario) {
+    this.viewedUser = user
   }
 
   //GetUsers

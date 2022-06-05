@@ -3,28 +3,28 @@ import { Usuario } from 'src/app/Models/usuario';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ActividadService } from 'src/app/Services/actividad.service';
 import { Actividad } from 'src/app/Models/actividad';
+import { ConfirmDialogComponent } from '../training/confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'app-training',
-  templateUrl: './training.component.html',
-  styleUrls: ['./training.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class TrainingComponent implements OnInit {
-  currentUser:Usuario = new Usuario
+export class ProfileComponent implements OnInit {
+  viewedUser:Usuario = new Usuario
   CurrentDate = new Date()
   years:number | undefined
   public filesList:any = []
   public previsualization:string | undefined
   animal: string | undefined;
   listActivities:Actividad [] = []
-  
+
   constructor(private userService:UsuarioService, public matDialog: MatDialog, private activityService:ActividadService) { }
 
   ngOnInit(): void {
-    this.loadCurrentUser();
+    this.loadViewedUser();
     this.activityService.getActivities().subscribe((res: any)=>{
       this.listActivities = res.reverse()
     })
@@ -41,9 +41,9 @@ export class TrainingComponent implements OnInit {
     });
   }
 
-  loadCurrentUser() {
-    this.currentUser = this.userService.getCurrentUser()
+  loadViewedUser() {
+    this.viewedUser = this.userService.getViewedUser()
 
-    this.years =  moment(this.CurrentDate).diff(moment(this.currentUser.fecha_nacimiento), 'years')
+    this.years =  moment(this.CurrentDate).diff(moment(this.viewedUser.fecha_nacimiento), 'years')
   }
 }

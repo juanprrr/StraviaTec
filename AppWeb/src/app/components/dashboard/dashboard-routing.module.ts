@@ -7,6 +7,7 @@ import { ExploreComponent } from './explore/explore.component';
 import { TrainingComponent } from './training/training.component';
 import { CrearActividadComponent } from './inicio/crear-actividad/crear-actividad.component';
 import { FriendsComponent } from './training/friends/friends.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent, children: [
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: 'explore', component: ExploreComponent},
       { path: 'training', component: TrainingComponent},
       { path: 'crear-actividad', component: CrearActividadComponent},
-      { path: 'friends', component: FriendsComponent}
+      { path: 'friends', component: FriendsComponent},
+      { path: 'profile', component: ProfileComponent }
     ]  
   },
     

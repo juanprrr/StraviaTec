@@ -12,6 +12,7 @@ import { ExploreComponent } from './explore/explore.component';
 import { TrainingComponent } from './training/training.component';
 import { CrearActividadComponent } from './inicio/crear-actividad/crear-actividad.component';
 import { ConfirmDialogComponent } from './training/confirm-dialog/confirm-dialog.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -24,7 +25,8 @@ import { ConfirmDialogComponent } from './training/confirm-dialog/confirm-dialog
     ExploreComponent,
     TrainingComponent,
     CrearActividadComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 <div class="container">
     <mat-toolbar>
-      <span>@{{currentUser.usuario}}</span>
+      <span>@{{viewedUser.usuario}}</span>
     </mat-toolbar>
     <mat-card>
             <mat-grid-list cols="8" rowHeight="70px">
@@ -12,35 +12,22 @@
                     <!--mat-icon aria-hidden="false" aria-label="Example home icon">person</mat-icon-->
                 </mat-grid-tile>
                 <mat-grid-tile
-                    [colspan]="1"
-                    [rowspan]="1">
-                    <button mat-raised-button color="primary" (click)="openDialog()">
-                      <mat-label>Editar </mat-label>
-                      <mat-icon aria-hidden="false" aria-label="Example home icon">mode</mat-icon>
-                    </button>
-                    <!--input (change)="getFile($event)" type="file"-->
-                </mat-grid-tile>
-                <mat-grid-tile
-                  [colspan]="5"
+                  [colspan]="6"
                   [rowspan]="1">
-                  <mat-label><h1><b>{{currentUser.nombre}} {{currentUser.apellido1}} {{currentUser.apellido2}}</b></h1></mat-label>
+                  <mat-label><h1><b>{{viewedUser.nombre}} {{viewedUser.apellido1}} {{viewedUser.apellido2}}</b></h1></mat-label>
                 </mat-grid-tile>
                 <mat-grid-tile
-                  [colspan]="1"
-                  [rowspan]="2">
-                </mat-grid-tile>
-                <mat-grid-tile
-                  [colspan]="5"
+                  [colspan]="6"
                   [rowspan]="2">
                   <button mat-raised-button color="primary" routerLink="/dashboard/friends">
-                    <mat-label>Amigos </mat-label>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">people</mat-icon>
+                    <mat-label>Seguir </mat-label>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">group_add</mat-icon>
                   </button>
                 </mat-grid-tile>
                 <mat-grid-tile
                   [colspan]="1"
                   [rowspan]="1">
-                  <mat-label><b>{{currentUser.nacionalidad}}</b></mat-label>
+                  <mat-label><b>{{viewedUser.nacionalidad}}</b></mat-label>
                 </mat-grid-tile>
                 <mat-grid-tile
                   [colspan]="1"
@@ -51,7 +38,7 @@
             <mat-divider></mat-divider>
             <br>
             <ng-container *ngFor="let act of listActivities">
-            <mat-grid-list cols="1" *ngIf="act.id_usuario == currentUser.usuario">
+            <mat-grid-list cols="1" *ngIf="act.id_usuario == viewedUser.usuario">
                 <mat-card style="margin-bottom: 10px;" class="mat-elevation-z3">
                   <mat-grid-list cols="6" rowHeight="40px">
                     <mat-grid-tile
