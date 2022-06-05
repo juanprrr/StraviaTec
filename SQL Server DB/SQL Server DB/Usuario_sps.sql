@@ -70,20 +70,16 @@ CREATE PROCEDURE sp_consultar_grupos
 AS
 SELECT * FROM straviadb.dbo.GRUPO
 
-/*MODIFICAR NOMBRE DE GRUPO*/
-CREATE PROCEDURE sp_actualizar_nombreGrupo
-@nombre VARCHAR(20),
-@idGrupo INT
-AS
-UPDATE straviadb.dbo.GRUPO SET nombre = @nombre
-WHERE id= @idGrupo;
-/*MODIFICAR ADMIN DE GRUPO*/
-CREATE PROCEDURE sp_actualizar_adminGrupo
-@nombreusuario VARCHAR(20),
-@idGrupo INT
-AS
-UPDATE straviadb.dbo.GRUPO SET id_admin = @nombreusuario
-WHERE id= @idGrupo;
+/*MODIFICAR REGISTROS DE GRUPO*/
+
+CREATE PROCEDURE sp_update_grupo
+@id INT, 
+@admin VARCHAR(20),
+@nombre VARCHAR(20)
+AS 
+UPDATE straviadb.dbo.GRUPO SET 
+id=@id, id_admin=@admin, nombre=@nombre
+WHERE id=@id
 
 /*ELIMINAR GRUPO*/
 CREATE PROCEDURE sp_eliminar_grupo
@@ -382,7 +378,6 @@ EXEC sp_crear_rol 1, 'organiza';
 EXEC sp_crear_rol 2, 'deportista';
 SELECT * FROM straviadb.dbo.ROL;
 
-DROP PROCEDURE sp_insertar_usuario
 -------------------------------/*CREAR USUARIOS*/
 CREATE PROCEDURE sp_insertar_usuario
 @_usuario VARCHAR(20),
@@ -445,7 +440,6 @@ CREATE PROCEDURE sp_consultar_usuarios
 AS
 SELECT * FROM straviadb.dbo.USUARIO
 
-DROP PROCEDURE	sp_consultar_usuarios
 EXEC sp_consultar_usuarios;
 
 /*CONSULTA PARA OBTENER EDAD DE USUARIOS*/
@@ -492,7 +486,6 @@ fecha_nacimiento = @fecha_nacimiento,
 _password = @_password
 WHERE usuario= @nombreusuario;
 
-drop procedure sp_update_usuario
 ------ELIMINAR USUARIO------
 CREATE PROCEDURE sp_eliminar_usuario
 @nombreusuario VARCHAR(20)
