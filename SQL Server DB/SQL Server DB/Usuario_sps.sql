@@ -319,28 +319,18 @@ END;
 EXEC sp_eliminar_carrera 123
 
 /*ACTUALIZAR DATOS DE CARRERA*/
+CREATE PROCEDURE sp_update_carrera
+@_id INT,
+@_id_actividad VARCHAR(20),
+@nombre	VARCHAR(20),
+@_fecha DATE,
+@_costo DECIMAL(10,2)
+AS
+UPDATE straviadb.dbo.CARRERA SET id=@_id,
+id_actividad =@_id_actividad ,nombre= @nombre,fecha=@_fecha,
+costo = @_costo
+WHERE id = @_id;
 
---NUEVA FECHA DE CARRERA
-CREATE PROCEDURE sp_actualizar_fecha_carrera
-@_id INT,
-@_fecha DATE
-AS
-UPDATE straviadb.dbo.CARRERA SET fecha = @_fecha
-WHERE id= @_id;
---NUEVO NOMBRE DE CARRERA
-CREATE PROCEDURE sp_actualizar_nombre_carrera
-@_id INT,
-@_nombre VARCHAR(20)
-AS
-UPDATE straviadb.dbo.CARRERA SET nombre = @_nombre
-WHERE id= @_id;
---NUEVO PRECIO DE CARRERA
-CREATE PROCEDURE sp_actualizar_precio_carrera
-@_id INT,
-@_precio DECIMAL(10, 2)
-AS
-UPDATE straviadb.dbo.CARRERA SET costo = @_precio
-WHERE id= @_id;
 
 -------------------------------/*CREAR CUENTA BANCARIA*/
 
@@ -513,13 +503,15 @@ CREATE PROCEDURE sp_update_usuario
 @_password VARCHAR(18)
 AS
 UPDATE straviadb.dbo.USUARIO 
-SET id_rol = @id_rol,id_carrera = @id_carrera,
+SET  usuario= @nombreusuario,
+id_rol = @id_rol,id_carrera = @id_carrera,
 nombre = @nombre, apellido1 = @apellido1, apellido2 = @apellido2,
 foto = @foto, nacionalidad = @nacionalidad, 
 fecha_nacimiento = @fecha_nacimiento,
 _password = @_password
 WHERE usuario= @nombreusuario;
 
+drop procedure sp_update_usuario
 ------ELIMINAR USUARIO------
 CREATE PROCEDURE sp_eliminar_usuario
 @nombreusuario VARCHAR(20)
