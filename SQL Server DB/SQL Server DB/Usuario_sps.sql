@@ -261,7 +261,7 @@ WHERE GVC.id_carrera =@id_carrera;
 CREATE PROCEDURE sp_consultar_actividad_amigos
 @usuario VARCHAR (20)
 AS
-SELECT * FROM straviadb.dbo.ACTIVIDAD AS ACT
+SELECT id_usuario, fecha, hora_fin, tipo_actividad, kilometraje, recorrido  FROM straviadb.dbo.ACTIVIDAD AS ACT
 JOIN straviadb.dbo.USUARIO_SIGUE_USUARIO AS USU
 ON USU.user_sigue = ACT.id_usuario
 WHERE USU.id_user = @usuario
@@ -498,38 +498,26 @@ EXEC sp_edad_usuarios 'juancho23'
 EXEC sp_edad_usuarios 'lebron23'
 
 /*ACTUALIZAR REGISTROS DE USUARIO*/
+
 ------ACTUALIZAR FOTO-------
-
-CREATE PROCEDURE sp_actualizar_foto
+CREATE PROCEDURE sp_update_usuario
 @nombreusuario VARCHAR(20),
-@foto IMAGE
+@id_rol INT,
+@id_carrera INT,
+@nombre VARCHAR(20),
+@apellido1 VARCHAR(20),
+@apellido2 VARCHAR(20),
+@foto IMAGE,
+@nacionalidad VARCHAR(30),
+@fecha_nacimiento DATE,
+@_password VARCHAR(18)
 AS
-UPDATE straviadb.dbo.USUARIO SET foto = @foto
-WHERE usuario= @nombreusuario;
-
-------ACTUALIZAR CARRERA------
-CREATE PROCEDURE sp_actualizar_carrera
-@nombreusuario VARCHAR(20),
-@_idcarrera INT
-AS
-UPDATE straviadb.dbo.USUARIO SET id_carrera = @_idcarrera
-WHERE usuario= @nombreusuario;
-
-EXEC sp_actualizar_carrera 'jordan23', 123;
-------ACTUALIZAR ROL------
-CREATE PROCEDURE sp_actualizar_rol
-@nombreusuario VARCHAR(20),
-@_idrol INT
-AS
-UPDATE straviadb.dbo.USUARIO SET id_rol = @_idrol
-WHERE usuario= @nombreusuario;
-
-------ACTUALIZAR PASSWORD------
-CREATE PROCEDURE sp_actualizar_password
-@nombreusuario VARCHAR(20),
-@_pwd VARCHAR(18)
-AS
-UPDATE straviadb.dbo.USUARIO SET _password = @_pwd
+UPDATE straviadb.dbo.USUARIO 
+SET id_rol = @id_rol,id_carrera = @id_carrera,
+nombre = @nombre, apellido1 = @apellido1, apellido2 = @apellido2,
+foto = @foto, nacionalidad = @nacionalidad, 
+fecha_nacimiento = @fecha_nacimiento,
+_password = @_password
 WHERE usuario= @nombreusuario;
 
 ------ELIMINAR USUARIO------
@@ -591,7 +579,8 @@ INSERT INTO straviadb.dbo.USUARIO_SIGUE_USUARIO
 (@id_usuario, @id_seguido);
 
 EXEC sp_crear_usuario_sigue_usuario "juancho23", "jordan23";
-EXEC sp_crear_usuario_sigue_usuario "juancho23", lebron23;
+EXEC sp_crear_usuario_sigue_usuario "juancho23", "lebron23";
+
 /*CONSULTAR SEGUIDOS POR UN USUARIO*/
 CREATE PROCEDURE sp_consultar_seguidos_x_usuario
 @id_usuario VARCHAR(20)
