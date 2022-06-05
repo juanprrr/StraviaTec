@@ -151,41 +151,22 @@ SELECT * FROM straviadb.dbo.RETO
 
 EXEC sp_consultar_retos
 
-/*ACTUALIZAR NOMBRE*/
-CREATE PROCEDURE sp_actualizar_nombre_reto
-@_id INT,
-@_nombre VARCHAR(20)
+/*ACTUALIZAR REGISTROS DE RETOS*/
+CREATE PROCEDURE sp_update_reto
+@id INT, 
+@nombre VARCHAR(20),
+@fecha_inicio DATE ,
+@fecha_finaliza DATE ,
+@tipo_actividad VARCHAR(20),
+@tipo_reto VARCHAR(20)
 AS
-UPDATE straviadb.dbo.RETO SET nombre = @_nombre
-WHERE id= @_id;
-/*ACTUALIZAR FECHA INICIO*/
-CREATE PROCEDURE sp_actualizar_fecha_inicio_reto
-@_id INT,
-@_fecha DATE
-AS
-UPDATE straviadb.dbo.RETO SET fecha_inicio = @_fecha
-WHERE id= @_id;
-/*ACTUALIZAR FECHA FINALIZA*/
-CREATE PROCEDURE sp_actualizar_fecha_fin_reto
-@_id INT,
-@_fecha DATE
-AS
-UPDATE straviadb.dbo.RETO SET fecha_finaliza = @_fecha
-WHERE id= @_id;
-/*ACTUALIZAR TIPO ACTIVIDAD*/
-CREATE PROCEDURE sp_actualizar_tipoacti_reto
-@_id INT,
-@_tipoactividad VARCHAR(20)
-AS
-UPDATE straviadb.dbo.RETO SET tipo_actividad = @_tipoactividad
-WHERE id= @_id;
-/*ACTUALIZAR TIPO RETO*/
-CREATE PROCEDURE sp_actualizar_tipo_reto
-@_id INT,
-@_tiporeto VARCHAR(20)
-AS
-UPDATE straviadb.dbo.RETO SET tipo_reto = @_tiporeto
-WHERE id= @_id;
+UPDATE straviadb.dbo.RETO SET
+id=@id, nombre=@nombre, fecha_inicio=@fecha_inicio,
+fecha_finaliza=@fecha_finaliza, 
+tipo_actividad=@tipo_actividad, tipo_reto=@tipo_reto
+WHERE id=@id
+
+
 /*ELIMINAR RETO*/
 CREATE PROCEDURE sp_eliminar_reto
 @idreto INT
