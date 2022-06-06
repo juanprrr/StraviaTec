@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actividad } from 'src/app/Models/actividad';
 import { Usuario } from 'src/app/Models/usuario';
 import { ActividadService } from 'src/app/Services/actividad.service';
@@ -22,7 +23,7 @@ export class CrearActividadComponent implements OnInit {
   currentUser:Usuario = new Usuario
   listActivities:Actividad [] = []
 
-  constructor(private activityService:ActividadService, private userService:UsuarioService) { }
+  constructor(private activityService:ActividadService, private _snackBar: MatSnackBar, private userService:UsuarioService) { }
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -40,12 +41,19 @@ export class CrearActividadComponent implements OnInit {
     console.log(newAct, "Nueva actividad")
     
     this.activityService.insertActivity(newAct).subscribe(()=>{
-      window.location.reload()
-      alert("La actividad se posteó exitosamente!")
-    },()=>alert("No se pudo postear la actividad, por favor intente de nuevo!"))
+      this.error("La actividad se posteó exitosamente!")
+    },()=>this.error("No se pudo postear la actividad, por favor intente de nuevo!"))
   }
 
   loadCurrentUser() {
     this.currentUser = this.userService.getCurrentUser()
+  }
+
+  error(message:string) {
+    this._snackBar.open(message, '',{
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    })
   }
 }

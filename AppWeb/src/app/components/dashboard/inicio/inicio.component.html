@@ -4,4 +4,53 @@
     <div class="example-spacer"></div>
     <button mat-raised-button color="primary" routerLink="/dashboard/crear-actividad">Publicar</button>
   </mat-toolbar>
+<mat-card>
+  <ng-container *ngFor="let act of listActivities">
+    <mat-grid-list cols="1">
+      <mat-toolbar>
+        <span>{{act.id_usuario}}</span>
+        <div class="example-spacer"></div>
+      </mat-toolbar>
+        <mat-card style="margin-bottom: 10px;" class="mat-elevation-z3">
+          <mat-grid-list cols="6" rowHeight="40px">
+            <mat-grid-tile
+                [colspan]="2"
+                [rowspan]="1">
+                <mat-label><b>Actividad: </b>{{act.tipo_actividad}}</mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile
+                [colspan]="4"
+                [rowspan]="6">
+                <img src="../../../assets/img/logo.png">
+            </mat-grid-tile>
+            <mat-grid-tile
+                [colspan]="2"
+                [rowspan]="1">
+                <mat-label><b>Reto: </b>{{act.id_reto}}</mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile
+                [colspan]="2"
+                [rowspan]="1">
+                <mat-label><b>Kilometraje: </b>{{act.kilometraje}}</mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile
+                [colspan]="2"
+                [rowspan]="1">
+                <mat-label><b>Inicio: </b>{{act.hora_inicio}}</mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile
+                [colspan]="2"
+                [rowspan]="1">
+                <mat-label><b>Finalización: </b>{{act.hora_fin}}</mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile
+                [colspan]="2"
+                [rowspan]="1">
+                <mat-label><b>Fecha: </b>{{act.fecha}}</mat-label>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card>
+    </mat-grid-list>
+    </ng-container>
+</mat-card>
 </div>

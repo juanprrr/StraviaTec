@@ -4,7 +4,6 @@ import * as moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { Usuario } from 'src/app/Models/usuario';
 import { UsuarioSigueUsuarioService } from 'src/app/Services/usuario-sigue-usuario.service';
-import { UsuarioSigueUsuario } from 'src/app/Models/usuario-sigue-usuario';
 
 @Component({
   selector: 'app-friends',
