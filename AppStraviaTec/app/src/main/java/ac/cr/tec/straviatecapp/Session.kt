@@ -32,4 +32,8 @@ class Session (
         db.userDao().insertAll(user)
     }
 
+    fun getUsername(): String {
+        return user.username
+    }
+
 }

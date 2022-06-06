@@ -39,8 +39,18 @@ class StartActivity : AppCompatActivity() {
         println(switchCarrera.isChecked)
         val intent = Intent(this, TrackActivity::class.java)
         intent.putExtra("activityType", typeSpinner.selectedItem.toString())
-        intent.putExtra("carrera", switchCarrera.isChecked)
-        intent.putExtra("reto", switchReto.isChecked)
+        if(switchCarrera.isChecked) {
+            intent.putExtra("carrera", etIdCarrera.text)
+        } else{
+            intent.putExtra("carrera", "")
+        }
+
+        if (switchReto.isChecked) {
+            intent.putExtra("reto", etIdReto.text)
+        } else{
+            intent.putExtra("reto", "")
+        }
+
         startActivity(intent)
 
     }

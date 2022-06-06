@@ -28,13 +28,15 @@ data class User(
  */
 @Entity
 data class Activity(
-    @PrimaryKey val start: String,
+    @PrimaryKey (autoGenerate = true)
+    val ID: Int,
+    val Id_reto:String,
+    val Id_usuario:String,
+    val start: String,
     val end: String,
     val length: Float,
-    val type: String,
     var gpx: String,
-    @Embedded
-    val user: User,
+    val type: String,
 )
 
 /**

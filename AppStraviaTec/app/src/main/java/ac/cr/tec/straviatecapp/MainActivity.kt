@@ -1,5 +1,6 @@
 package ac.cr.tec.straviatecapp
 
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.os.Looper
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,9 +32,6 @@ class MainActivity : AppCompatActivity() {
         lgnButton.setOnClickListener{
             login()
         }
-
-
-
     }
 
     /**
@@ -50,19 +49,22 @@ class MainActivity : AppCompatActivity() {
 
         // se valida si usuario se encuentra en la base de datos
 
-        session.addQueso()
-        session.login { success ->
-            run {
-                if (success) {
-                    (application as GlobalApp).session = session
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show()
+        runOnUiThread {
+
+            session.addQueso()
+            session.login { success ->
+                run {
+                    if (success) {
+                        (application as GlobalApp).session = session
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         }
-
     }
 
 
@@ -74,23 +76,27 @@ class MainActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.passwordInput)!!.text = null
     }
 
-    private fun getRetrofit():Retrofit{
+
+    private fun getRetrofit(): Retrofit {
+
         return Retrofit.Builder()
-            .baseUrl("URL-BASE")
+            .baseUrl("baseURL")
             .addConverterFactory(GsonConverterFactory.create())
+            //.client(getClient())
             .build()
     }
 
-    private fun sync() {
+    fun sync(view: View) {
         CoroutineScope(Dispatchers.IO).launch {
-            val userCall = getRetrofit().create(APIService::class.java).getUsernames("URLforUSERS")
-            val pwCall = getRetrofit().create(APIService::class.java).getPasswords("URLforUSERS")
-            val _usernames = userCall.body()
-            val _passwords = pwCall.body()
+            val userCall = getRetrofit().create(APIService::class.java).getUsernames()
+            val _usernames = userCall.body() as User?
+
             runOnUiThread{
                 if (userCall.isSuccessful){
-                    val usernames = _usernames?.username ?: emptyList<String>()
-                    val passwords = _usernames?.password ?: emptyList<String>()
+                    (application as GlobalApp).session!!.addUser(_usernames!!)
+
+                    Toast.makeText(this@MainActivity, "Error al sincronizar bases", Toast.LENGTH_SHORT)
+                        .show()
                 }else {
                     showError()
                 }

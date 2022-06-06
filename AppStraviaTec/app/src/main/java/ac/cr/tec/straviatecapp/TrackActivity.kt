@@ -3,6 +3,7 @@ package ac.cr.tec.straviatecapp
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.Manifest.permission.ACTIVITY_RECOGNITION
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.location.Location
 import android.os.Build
@@ -14,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Chronometer
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -162,7 +164,35 @@ class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun stopActivity(view: View) {
         chronometer.stop()
-        //val activity = Activity()
+
+        val activityType:String = intent.getStringExtra("activityType").toString()
+        val carrera:String = intent.getStringExtra("carrera").toString()
+        val reto:String = intent.getStringExtra("reto").toString()
+
+        val currentAct = Activity(0, reto,
+            (application as GlobalApp).session!!.getUsername(),
+            DateTimeFormatter.ISO_INSTANT.format(timeStart),
+            DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
+            distance/1000,
+            generateGPX("route", locationList),
+            activityType,
+        )
+
+        (application as GlobalApp).session?.addActivity(currentAct){success ->
+            run {
+                if (success) {
+                    Toast.makeText(this, "Actividad insertada en base de datos local", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(this, "No se logró guardar actividad en base de datos local", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        finish()
+
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+
     }
 
     private fun generateGPX(name: String, points: List<Location>): String {

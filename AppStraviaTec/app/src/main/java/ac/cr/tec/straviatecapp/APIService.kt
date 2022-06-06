@@ -1,13 +1,23 @@
 package ac.cr.tec.straviatecapp
 
+import com.google.gson.annotations.SerializedName
+import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Url
 
 interface APIService {
-    @GET
-    suspend fun getUsernames(@Url url:String):Response<UserResponse>
+    @GET("/api/Usuario/")
+    suspend fun getUsernames():Response<UserCred>
 
-    @GET
-    fun getPasswords(@Url url:String):Response<UserResponse>
+    @POST("/api/Actividad/")
+    suspend fun postActivities(@Body activity: Activity): Call<*>
+
 }
+
+data class UserCred(
+    @SerializedName("usuario") var username: String,
+    @SerializedName("password") var password: String,
+)
