@@ -1,0 +1,80 @@
+<div class="container">
+    <mat-toolbar>
+        <span>Crear Actividad</span>
+    </mat-toolbar>
+    <mat-card style="margin-top: 10px">
+        <form>
+            <mat-grid-list cols="4" rowHeight="70px">
+                <mat-grid-tile
+                    [colspan]="1"
+                    [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Actividad</mat-label>
+                        <mat-select [(ngModel)]="newActivity.tipo_actividad" [ngModelOptions]="{standalone: true}">
+                          <mat-option *ngFor="let act of activities" [value]="act.value">
+                            {{act.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile
+                    [colspan]="3"
+                    [rowspan]="6">
+                    <img src="../../../assets/img/logo.png">
+                </mat-grid-tile>
+                <mat-grid-tile
+                    [colspan]="1"
+                    [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Reto</mat-label>
+                        <mat-select>
+                          <mat-option>
+                              N/A
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile
+                    [colspan]="1"
+                    [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Kilometraje</mat-label>
+                        <input type="number" matInput autocomplete="off" [(ngModel)]="newActivity.kilometraje" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile
+                    [colspan]="1"
+                    [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Inicio</mat-label>
+                        <input type="time" step="1" matInput autocomplete="off" [(ngModel)]="newActivity.hora_inicio" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile
+                    [colspan]="1"
+                    [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Finalización</mat-label>
+                        <input type="time" step="1" matInput autocomplete="off" [(ngModel)]="newActivity.hora_fin" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile
+                    [colspan]="1"
+                    [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Fecha</mat-label>
+                        <input type="date" matInput autocomplete="off" [(ngModel)]="newActivity.fecha" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile
+                    [colspan]="1"
+                    [rowspan]="1">
+                    <button mat-raised-button style="margin-right: 10px" routerLink="/dashboard">Regresar</button>
+                    <button mat-raised-button color="primary" (click)="addActivity(newActivity)">Postear</button>
+                </mat-grid-tile>
+              </mat-grid-list>
+            <br>
+            <br>
+        </form>
+    </mat-card>
+</div>

@@ -1,0 +1,84 @@
+<div class="container">
+    <mat-toolbar>
+      <span>@{{viewedUser.usuario}}</span>
+    </mat-toolbar>
+    <mat-card>
+            <mat-grid-list cols="8" rowHeight="70px">
+                <mat-grid-tile
+                    [colspan]="2"
+                    [rowspan]="3"
+                    [style.background]="'lightgray'">
+                    <img *ngIf="previsualization" width="200px" [src]="previsualization">
+                    <!--mat-icon aria-hidden="false" aria-label="Example home icon">person</mat-icon-->
+                </mat-grid-tile>
+                <mat-grid-tile
+                  [colspan]="6"
+                  [rowspan]="1">
+                  <mat-label><h1><b>{{viewedUser.nombre}} {{viewedUser.apellido1}} {{viewedUser.apellido2}}</b></h1></mat-label>
+                </mat-grid-tile>
+                <mat-grid-tile
+                  [colspan]="6"
+                  [rowspan]="2">
+                  <button mat-raised-button color="{{buttonColor}}" (click)="followUser()">
+                    <mat-label>{{buttonName}} </mat-label>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">{{iconName}}</mat-icon>
+                  </button>
+                </mat-grid-tile>
+                <mat-grid-tile
+                  [colspan]="1"
+                  [rowspan]="1">
+                  <mat-label><b>{{viewedUser.nacionalidad}}</b></mat-label>
+                </mat-grid-tile>
+                <mat-grid-tile
+                  [colspan]="1"
+                  [rowspan]="1">
+                  <mat-label><b>{{years}} años</b></mat-label>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-divider></mat-divider>
+            <br>
+            <ng-container *ngFor="let act of listActivities">
+            <mat-grid-list cols="1" *ngIf="act.id_usuario == viewedUser.usuario">
+                <mat-card style="margin-bottom: 10px;" class="mat-elevation-z3">
+                  <mat-grid-list cols="6" rowHeight="40px">
+                    <mat-grid-tile
+                        [colspan]="2"
+                        [rowspan]="1">
+                        <mat-label><b>Actividad: </b>{{act.tipo_actividad}}</mat-label>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="4"
+                        [rowspan]="6">
+                        <img src="../../../assets/img/logo.png">
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="2"
+                        [rowspan]="1">
+                        <mat-label><b>Reto: </b>{{act.id_reto}}</mat-label>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="2"
+                        [rowspan]="1">
+                        <mat-label><b>Kilometraje: </b>{{act.kilometraje}}</mat-label>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="2"
+                        [rowspan]="1">
+                        <mat-label><b>Inicio: </b>{{act.hora_inicio}}</mat-label>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="2"
+                        [rowspan]="1">
+                        <mat-label><b>Finalización: </b>{{act.hora_fin}}</mat-label>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="2"
+                        [rowspan]="1">
+                        <mat-label><b>Fecha: </b>{{act.fecha}}</mat-label>
+                    </mat-grid-tile>
+                  </mat-grid-list>
+                </mat-card>
+            </mat-grid-list>
+            </ng-container>
+  </mat-card>
+</div>

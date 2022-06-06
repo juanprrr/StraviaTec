@@ -55,7 +55,7 @@ namespace StraviaTec.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategoria(int id, Categoria categoria)
         {
-            if (id != categoria.codigo)
+            if (id != categoria.nombre)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace StraviaTec.API.Controllers
             _context.Categoria.Add(categoria);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategoria", new { id = categoria.codigo }, categoria);
+            return CreatedAtAction("GetCategoria", new { id = categoria.nombre }, categoria);
         }
 
         // DELETE: api/Categoria/5
@@ -118,7 +118,7 @@ namespace StraviaTec.API.Controllers
 
         private bool CategoriaExists(int id)
         {
-            return (_context.Categoria?.Any(e => e.codigo == id)).GetValueOrDefault();
+            return (_context.Categoria?.Any(e => e.nombre == id)).GetValueOrDefault();
         }
     }
 }

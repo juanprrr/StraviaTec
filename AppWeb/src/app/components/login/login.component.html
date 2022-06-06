@@ -1,0 +1,24 @@
+<div class="body">
+  <div class="admin">
+    <button (click)="ingresarAdmin()" class="boton3" mat-raised-button mat-button >¿Organizador?</button>
+  </div>
+
+    <div class="login" [formGroup]="form" (ngSubmit)="userLogged()">
+        <img src="../../../assets/img/logo.png" alt="" width="50%" height="80%">
+        <h1 class="h3 mb-3 fw-normal"></h1>
+        <mat-form-field class="ancho" appearance="fill">
+          <mat-label>Usuario</mat-label>
+          <input type="text" matInput autocomplete="off" formControlName="usuario">
+        </mat-form-field>
+        <mat-form-field class="ancho" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput autocomplete="off" formControlName="password">
+        </mat-form-field>
+        <br>
+        <button type="submit" (click)="checkLoginDeportistas()" class="boton" mat-raised-button mat-button [disabled]="form.invalid">Ingresar</button>
+
+        <button (click)="goToPage('/registro')" class="boton2" mat-raised-button mat-button  >Registarse</button>
+    </div>
+</div>
+
+
