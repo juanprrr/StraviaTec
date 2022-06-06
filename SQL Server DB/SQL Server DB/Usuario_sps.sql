@@ -93,15 +93,27 @@ DELETE FROM GRUPO
 WHERE id=@idgrupo;
 
 -------------------------------/*CREAR CATEGORÍAS*/
-CREATE PROCEDURE sp_crear_categorias
-@id_carrera INT, 
+CREATE PROCEDURE sp_crear_categorias 
 @descripcion VARCHAR(40),
 @nombre VARCHAR(20)
 AS
 INSERT INTO CATEGORIAS
-(nombre, id_carrera,descripcion) VALUES
+(nombre,descripcion) VALUES
 (
-@nombre,@id_carrera, @descripcion
+@nombre,@descripcion
+);
+use straviadb
+--drop PROCEDURE sp_crear_categorias
+
+
+CREATE PROCEDURE sp_crear_categoria_en_carrera 
+@id_carrera INT,
+@nombre_catego VARCHAR(20)
+AS
+INSERT INTO CATE_DE_CARRERA
+(id_carrera,Nombre_Cate) VALUES
+(
+@id_carrera,@nombre_catego
 );
 --/*CONSULTAR CATEGORÍA POR NOMBRE*/
 CREATE PROCEDURE sp_consultar_categoria
@@ -114,6 +126,7 @@ WHERE nombre=@nombre
 CREATE PROCEDURE sp_consultar_categorias
 AS
 SELECT * FROM CATEGORIAS
+
 
 -------------------------------/*CREAR RETO*/
 
