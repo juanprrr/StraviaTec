@@ -1,0 +1,28 @@
+[
+    {
+        "nombre":"Carrera",
+        "redirect":"/dashboard-admin/gestion-carreras"
+    },
+    {
+        "nombre":"Grupos",
+        "redirect":"/dashboard-admin/gestion-grupos"
+    },
+    {
+        "nombre":"Retos",
+        "redirect":"/dashboard-admin/gestion-retos"
+    },
+    {
+        "nombre":"Inscripciones",
+        "redirect":"/dashboard-admin/inscripcione"
+    },
+    {
+        "nombre":"Reportes",
+        "redirect":"/dashboard-admin/reportes-participante"
+    },
+    {
+        "nombre":"Posiciones",
+        "redirect": "/dashboard-admin/reportes-pocisiones"
+    }
+]
+
+
