@@ -3,7 +3,7 @@ package ac.cr.tec.straviatecapp
 import androidx.room.*
 
 /**
- * Database definition for storing local data related to users and activities
+ * Definición de base de datos local
  */
 @Database(
     entities = [User::class, Activity::class],
@@ -14,8 +14,7 @@ abstract class LocalDB : RoomDatabase() {
     abstract fun activityDao(): ActivityDao
 }
 /**
- * Stores only previously logged users, must validate credentials again
- * when doing synchronization
+ * Entidad Usuario
  */
 @Entity
 data class User(
@@ -24,7 +23,7 @@ data class User(
 )
 
 /**
- * Stores Data related to an activity
+ * Entidad Actividad
  */
 @Entity
 data class Activity(
@@ -40,8 +39,7 @@ data class Activity(
 )
 
 /**
- * Interface to perform sql operations on databases that have a
- * [User] entity
+ * Interface para operaciones SQL para la entidad Usuario
  */
 @Dao
 interface UserDao {
@@ -72,8 +70,7 @@ interface UserDao {
 }
 
 /**
- * Interface to perform sql operations on databases that have a
- * [Activity] entity
+ * Interface para operaciones SQL para la entidad Activity
  */
 @Dao
 interface ActivityDao {

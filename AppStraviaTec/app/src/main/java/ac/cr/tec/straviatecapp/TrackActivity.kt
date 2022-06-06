@@ -27,6 +27,9 @@ import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
+/**
+ * Actividad para rastrear usuario y tomar informacion de actividad
+ */
 class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -81,6 +84,9 @@ class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
         createMapFragment()
     }
 
+    /**
+     * Se dibuja ruta en mapa
+     */
     fun addLocationToRoute(locations: List<Location>) {
         mMap.clear()
         val originalLatLngList = polylineOptions.points
@@ -92,6 +98,9 @@ class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addPolyline(polylineOptions)
     }
 
+    /**
+     * Listener de ubicacion de usuario
+     */
     @SuppressLint("MissingPermission")
     @AfterPermissionGranted(REQUEST_CODE_FINE_LOCATION)
     private fun setupLocationChangeListener() {
@@ -112,17 +121,24 @@ class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
+    /**
+     * Se crea mapa en pantalla
+     */
     private fun createMapFragment() {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
     }
 
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         showUserLocation()
     }
 
+    /**
+     * Muestra ubicacion de usuario
+     */
     @SuppressLint("MissingPermission")
     @AfterPermissionGranted(REQUEST_CODE_FINE_LOCATION)
     private fun showUserLocation() {
@@ -139,6 +155,9 @@ class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Llama metodos para iniciar la actividad
+     */
     //@AfterPermissionGranted(REQUEST_CODE_ACTIVITY_RECOGNITION)
     fun startTracking(view: View) {
         val isActivityRecognitionPermissionFree = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
@@ -162,6 +181,9 @@ class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    /**
+     * Detiene actividad y guarda datos para pasarlos a base de datos
+     */
     fun stopActivity(view: View) {
         chronometer.stop()
 
@@ -195,6 +217,9 @@ class TrackActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    /**
+     * Genera archivo .gpx a partir de una lista de puntos de mapa
+     */
     private fun generateGPX(name: String, points: List<Location>): String {
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><gpx xmlns=\"http://www.topografix.com/GPX/1/1\" creator=\"StraviaTecApp 0.1.0\" version=\"1.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\"><trk>\n"
         val name = "<name>$name</name><trkseg>\n"

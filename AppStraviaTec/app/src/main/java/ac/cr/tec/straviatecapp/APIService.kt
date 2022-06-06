@@ -8,6 +8,10 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Url
 
+/**
+ * Interfaz que sirve como servicio API para comunicarse con base
+ * de datos principal
+ */
 interface APIService {
     @GET("/api/Usuario/")
     suspend fun getUsernames():Response<UserCred>

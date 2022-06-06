@@ -13,6 +13,11 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
+/**
+ * Clase para creacion de fragmento
+ * para escoger fecha por meddio de un
+ * calendario
+ */
 class DatePickerFragment(val listener: (day:Int, month:Int, year:Int) -> Unit) : DialogFragment(),
     DatePickerDialog.OnDateSetListener {
 

@@ -8,7 +8,10 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 
-
+/**
+ * Actividad Home, donde se puede escoger si iniciar una actividad
+ * o si subir una actividad.
+ */
 class HomeActivity : AppCompatActivity() {
     private val activity =  this@HomeActivity
 

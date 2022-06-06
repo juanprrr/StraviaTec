@@ -10,6 +10,9 @@ import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_start.*
 import java.util.*
 
+/**
+ * Clase para iniciar una actividad nueva
+ */
 class StartActivity : AppCompatActivity() {
 
     lateinit var spinType : Spinner
@@ -34,6 +37,9 @@ class StartActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * pasa parametros a TrackActivity
+     */
     fun nextBtn(view: View){
         println(typeSpinner.selectedItem)
         println(switchCarrera.isChecked)

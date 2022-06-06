@@ -11,6 +11,10 @@ import android.widget.SpinnerAdapter
 import kotlinx.android.synthetic.main.activity_load.*
 import java.net.Inet4Address
 
+/**
+ * Actividad donde se cargaran datos de una actividad anterior
+ * para luego pasarla a la base de datos local
+ */
 class LoadActivity : AppCompatActivity() {
 
     lateinit var spinType : Spinner
@@ -34,6 +38,7 @@ class LoadActivity : AppCompatActivity() {
         spinType = findViewById(R.id.typeSpinner) as Spinner
         val actTypesArr = arrayOf("Correr", "Nadar", "Ciclismo", "Senderismo", "Kayak", "Caminata")
 
+        //Listener de spinner
         spinType.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, actTypesArr)
         spinType.onItemSelectedListener  = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -46,6 +51,7 @@ class LoadActivity : AppCompatActivity() {
         }
     }
 
+    // Seleccion de archivos
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -55,19 +61,25 @@ class LoadActivity : AppCompatActivity() {
 
     }
 
+
+    //Metodo para mostrar seleccion de hora
     private fun showTimePicker() {
         val timePicker = TimePickerFragment {onTimeSelected(it)}
         timePicker.show(supportFragmentManager, "time")
     }
 
+    // Se escribe la hora seleccionada
     private fun onTimeSelected(time:String){
         etTime.setText("Hora: $time")
     }
+
+    // Metodo para mostrar seleccion de fecha
     private fun showDatePicker() {
         val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year) }
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
+    // Escribe la fecha seleccionada
     fun onDateSelected(day: Int, month: Int, year: Int){
         etDate.setText("Fecha: $day / $month / $year")
     }

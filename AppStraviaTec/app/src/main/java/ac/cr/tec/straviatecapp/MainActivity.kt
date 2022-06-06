@@ -38,16 +38,11 @@ class MainActivity : AppCompatActivity() {
      * Se encarga de buscar si correo y contraseña coinciden
      * en la base de datos.
      */
-
-
     fun login() {
         val username = findViewById<EditText>(R.id.emailInput).text.toString()
         val password = findViewById<EditText>(R.id.passwordInput).text.toString()
         val user = User(username, password)
         val session = Session(this, user)
-
-
-        // se valida si usuario se encuentra en la base de datos
 
         runOnUiThread {
 
@@ -76,7 +71,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.passwordInput)!!.text = null
     }
 
-
+    /**
+     * Se crea instancia Retrofit
+     */
     private fun getRetrofit(): Retrofit {
 
         return Retrofit.Builder()
@@ -86,6 +83,9 @@ class MainActivity : AppCompatActivity() {
             .build()
     }
 
+    /**
+     * Sincroniza las bases de datos
+     */
     fun sync(view: View) {
         CoroutineScope(Dispatchers.IO).launch {
             val userCall = getRetrofit().create(APIService::class.java).getUsernames()
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 if (userCall.isSuccessful){
                     (application as GlobalApp).session!!.addUser(_usernames!!)
 
-                    Toast.makeText(this@MainActivity, "Error al sincronizar bases", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@MainActivity, "Se han sincornizado las bases de datos", Toast.LENGTH_SHORT)
                         .show()
                 }else {
                     showError()
@@ -104,7 +104,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    /**
+     * Mensaje de error generico
+     */
     private fun showError() {
         Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
     }

@@ -8,6 +8,9 @@ import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
+/**
+ * Clase para crear fragmento para seleccion de hora
+ */
 class TimePickerFragment(val listener: (String) -> Unit) : DialogFragment(),
     TimePickerDialog.OnTimeSetListener{
 
