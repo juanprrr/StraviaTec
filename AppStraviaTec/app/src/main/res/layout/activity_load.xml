@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".LoadActivity">
+
+    <EditText
+        android:id="@+id/etDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:hint="Select Date"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/etTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:hint="Select Time"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_marginTop="40dp"/>
+
+    <Spinner
+        android:id="@+id/typeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal">
+
+        <Switch
+            android:id="@+id/switchCarrera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:text="Carrera" />
+
+        <Switch
+            android:id="@+id/switchReto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:text="Reto" />
+
+    </LinearLayout>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_marginTop="24dp"
+         android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/etKm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:hint="Kilometraje"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="40dp"/>
+
+        <EditText
+            android:id="@+id/etDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:hint="Duración"
+            android:inputType="time"
+            android:layout_marginTop="40dp"/>
+
+     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Seleccionar archivo .gpx"/>
+
+</LinearLayout>
