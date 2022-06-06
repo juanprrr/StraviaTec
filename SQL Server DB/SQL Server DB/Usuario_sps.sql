@@ -1,5 +1,5 @@
 -------------------------------/*CREAR PATROCINADOR*/
-
+USE straviadb;
 CREATE PROCEDURE sp_crear_patrocinador
 @id INT,
 @nombre_rep VARCHAR(15),
@@ -9,7 +9,7 @@ CREATE PROCEDURE sp_crear_patrocinador
 @telefono VARCHAR(15),
 @logo IMAGE
 AS 
-INSERT INTO straviadb.dbo.PATROCINADOR
+INSERT INTO PATROCINADOR
 (id, nombre_rep, apellido1_rep, apellido2_rep, 
 nombre_comercial, telefono_representante, logo)
 VALUES
@@ -17,23 +17,25 @@ VALUES
 @nombrecomercial, @telefono, @logo);
 
 /*CONSULTAR PATROCINADOR POR ID*/
+
 CREATE PROCEDURE sp_consultar_patrocinador
 @id_patron INT
 AS
-SELECT * FROM straviadb.dbo.PATROCINADOR
+SELECT * FROM PATROCINADOR
 WHERE id = @id_patron;
 
 /*CONSULTAR LISTA DE PATROCINADORES*/
 CREATE PROCEDURE sp_consultar_patrocinadores
 AS
-SELECT * FROM straviadb.dbo.PATROCINADOR
+SELECT * FROM PATROCINADOR
 
 -------------------------------/*CREAR PATROCINA CARRERA*/
+
 CREATE PROCEDURE sp_crear_patrocina_carrera
 @id_patron INT,
 @id_carrera INT
 AS 
-INSERT INTO straviadb.dbo.PATROCINA_CARRERA
+INSERT INTO PATROCINA_CARRERA
 (id_patron, id_carrera) VALUES 
 (@id_patron,@id_carrera);
 
@@ -41,8 +43,8 @@ INSERT INTO straviadb.dbo.PATROCINA_CARRERA
 CREATE PROCEDURE sp_consultar_patrocinadores_x_carrera
 @id_carrera INT
 AS
-SELECT *  FROM straviadb.dbo.PATROCINADOR as G
-JOIN straviadb.dbo.PATROCINA_CARRERA AS GVR ON GVR.id_patron= G.id
+SELECT *  FROM PATROCINADOR as G
+JOIN PATROCINA_CARRERA AS GVR ON GVR.id_patron= G.id
 WHERE GVR.id_carrera =@id_carrera;
 
 /*PROCEDIMIENTOS ALMACENADOS REQUERIDOS PARA USUARIOS*/
@@ -58,26 +60,26 @@ INSERT INTO GRUPO
 @id, @admin, @nombre
 );
 
-/*CONSULTAR GRUPO POR ID*/
+---/*CONSULTAR GRUPO POR ID*/
 CREATE PROCEDURE sp_consultar_grupo
 @id INT
 AS
-SELECT * FROM straviadb.dbo.GRUPO
+SELECT * FROM GRUPO
 WHERE id=@id;
-
 /*CONSULTAR GRUPOS*/
 CREATE PROCEDURE sp_consultar_grupos
 AS
-SELECT * FROM straviadb.dbo.GRUPO
+SELECT * FROM GRUPO
 
-/*MODIFICAR REGISTROS DE GRUPO*/
+
+---/*MODIFICAR REGISTROS DE GRUPO*/
 
 CREATE PROCEDURE sp_update_grupo
 @id INT, 
 @admin VARCHAR(20),
 @nombre VARCHAR(20)
 AS 
-UPDATE straviadb.dbo.GRUPO SET 
+UPDATE GRUPO SET 
 id=@id, id_admin=@admin, nombre=@nombre
 WHERE id=@id
 
@@ -96,24 +98,25 @@ CREATE PROCEDURE sp_crear_categorias
 @descripcion VARCHAR(40),
 @nombre VARCHAR(20)
 AS
-INSERT INTO straviadb.dbo.CATEGORIAS
+INSERT INTO CATEGORIAS
 (nombre, id_carrera,descripcion) VALUES
 (
 @nombre,@id_carrera, @descripcion
 );
-/*CONSULTAR CATEGORÍA POR NOMBRE*/
+--/*CONSULTAR CATEGORÍA POR NOMBRE*/
 CREATE PROCEDURE sp_consultar_categoria
 @nombre VARCHAR(20)
 AS
-SELECT * FROM straviadb.dbo.CATEGORIAS
+SELECT * FROM CATEGORIAS
 WHERE nombre=@nombre
 
-/*CONSULTAR CATEGORÍAS*/
+--/*CONSULTAR CATEGORÍAS*/
 CREATE PROCEDURE sp_consultar_categorias
 AS
-SELECT * FROM straviadb.dbo.CATEGORIAS
+SELECT * FROM CATEGORIAS
 
 -------------------------------/*CREAR RETO*/
+
 CREATE PROCEDURE sp_crear_reto
 @id INT, 
 @nombre VARCHAR(20),
@@ -122,7 +125,7 @@ CREATE PROCEDURE sp_crear_reto
 @tipo_actividad VARCHAR(20),
 @tipo_reto VARCHAR(20)
 AS
-INSERT INTO straviadb.dbo.RETO
+INSERT INTO RETO
 (id, nombre, fecha_inicio, fecha_finaliza,
 tipo_actividad, tipo_reto
 ) VALUES
@@ -130,25 +133,19 @@ tipo_actividad, tipo_reto
 @id, @nombre, @fecha_inicio, @fecha_finaliza,
 @tipo_actividad, @tipo_reto
 )
-EXEC sp_crear_reto 1, 'pseudomaraton', '2022-05-26','2022-05-31',
-'correr', 'fondo'
-EXEC sp_crear_reto 2, 'aguas abiertas', '2022-05-27','2022-05-30',
-'natacion', 'fondo'
+
 /*Obtener reto por id*/
 CREATE PROCEDURE sp_consultar_reto
 @id INT
 AS
-SELECT * FROM straviadb.dbo.RETO
+SELECT * FROM RETO
 WHERE id=@id;
 
-EXEC sp_consultar_reto 2
-
 /*Obtener todos los retos*/
+
 CREATE PROCEDURE sp_consultar_retos
 AS
-SELECT * FROM straviadb.dbo.RETO
-
-EXEC sp_consultar_retos
+SELECT * FROM RETO
 
 /*ACTUALIZAR REGISTROS DE RETOS*/
 CREATE PROCEDURE sp_update_reto
@@ -159,42 +156,38 @@ CREATE PROCEDURE sp_update_reto
 @tipo_actividad VARCHAR(20),
 @tipo_reto VARCHAR(20)
 AS
-UPDATE straviadb.dbo.RETO SET
+UPDATE RETO SET
 id=@id, nombre=@nombre, fecha_inicio=@fecha_inicio,
 fecha_finaliza=@fecha_finaliza, 
 tipo_actividad=@tipo_actividad, tipo_reto=@tipo_reto
 WHERE id=@id
 
-
 /*ELIMINAR RETO*/
 CREATE PROCEDURE sp_eliminar_reto
 @idreto INT
 AS
-DELETE FROM straviadb.dbo.RETO 
+DELETE FROM RETO 
 WHERE id=@idreto
-
-EXEC sp_eliminar_reto 2
 
 -------------------------------/*CREAR GRUPO_VE_RETO*/
 CREATE PROCEDURE sp_crear_grupo_ve_reto
 @id_reto INT,
 @grupo INT
 AS 
-INSERT INTO straviadb.dbo.GRUPO_VE_RETO
+INSERT INTO GRUPO_VE_RETO
 (id_reto, id_grupo) VALUES 
 (@id_reto,@grupo);
 
 /*CONSULTAR GRUPOS VISIBLES DE UN RETO*/
-
 CREATE PROCEDURE sp_consultar_grupos_ven_reto
 @id_reto INT
 AS
-SELECT nombre, id_admin  FROM straviadb.dbo.GRUPO as G
-JOIN straviadb.dbo.GRUPO_VE_RETO AS GVR ON GVR.id_grupo= G.id
+SELECT nombre, id_admin  FROM GRUPO as G
+JOIN GRUPO_VE_RETO AS GVR ON GVR.id_grupo= G.id
 WHERE GVR.id_reto =@id_reto;
 
-
 -------------------------------/*CREAR ACTIVIDAD*/
+
 CREATE PROCEDURE sp_crear_actividad
 @id INT,
 @id_reto INT,
@@ -206,7 +199,7 @@ CREATE PROCEDURE sp_crear_actividad
 @fecha DATE,
 @recorrido XML
 AS
-INSERT INTO straviadb.dbo.ACTIVIDAD
+INSERT INTO ACTIVIDAD
 (id,id_reto,id_usuario,hora_inicio,hora_fin ,
 tipo_actividad ,kilometraje,fecha,recorrido) 
 VALUES
@@ -214,50 +207,32 @@ VALUES
 @tipo_actividad,@kilometraje,@fecha,@recorrido
 )
 
-EXEC sp_crear_actividad 1, NULL, 'jordan23', '12:34:54.1', '12:39:54.1', 'Correr', 
-12, '2022-05-24', NULL;
-EXEC sp_crear_actividad 2, NULL, 'jordan23', '5:34:54.1', '5:39:54.1', 'Natación', 
-1, '2022-06-24', NULL;
-EXEC sp_crear_actividad 3, NULL, 'lebron23', '5:34:54.1', '5:39:54.1', 'Correr', 
-1, '2022-06-25', NULL;
-EXEC sp_crear_actividad 4, NULL, 'lebron23', '5:34:54.1', '5:39:54.1', 'Kayak', 
-1, '2022-06-26', NULL;
-SELECT * FROM straviadb.dbo.ACTIVIDAD
 /*OBTENER ACTIVIDAD POR USUARIO*/
 CREATE PROCEDURE sp_consultar_actividad_usuario
 @usuario_id VARCHAR(20)
 AS
-SELECT * FROM straviadb.dbo.ACTIVIDAD
+SELECT * FROM ACTIVIDAD
 WHERE id_usuario=@usuario_id;
-
-CREATE PROCEDURE sp_consultar_grupos_ven_carrera
-@id_carrera INT
-AS
-SELECT nombre, id_admin  FROM straviadb.dbo.GRUPO as G
-JOIN straviadb.dbo.GRUPO_VE_CARRERA AS GVC ON GVC.id_grupo= G.id
-WHERE GVC.id_carrera =@id_carrera;
 
 /*OBTENER ACTIVIDAD DE AMIGOS DEL USUARIO*/
 CREATE PROCEDURE sp_consultar_actividad_amigos
 @usuario VARCHAR (20)
 AS
-SELECT id_usuario, fecha, hora_fin, tipo_actividad, kilometraje, recorrido  FROM straviadb.dbo.ACTIVIDAD AS ACT
-JOIN straviadb.dbo.USUARIO_SIGUE_USUARIO AS USU
+SELECT id_usuario, fecha, hora_fin, tipo_actividad, kilometraje, recorrido  FROM ACTIVIDAD AS ACT
+JOIN USUARIO_SIGUE_USUARIO AS USU
 ON USU.user_sigue = ACT.id_usuario
 WHERE USU.id_user = @usuario
 
-EXEC sp_consultar_actividad_amigos "juancho23";
-
 /*OBTENER LA DURACIÓN DE UNA ACTIVIDAD*/
+
 CREATE PROCEDURE sp_consultar_duracion
 @id_actividad INT
 AS
 SELECT id_usuario, fecha, tipo_actividad, 
 CONVERT(VARCHAR(8), DATEADD(SECOND, DATEDIFF(SECOND,hora_inicio, hora_fin),0), 108) 
 AS Duracion
-FROM straviadb.dbo.ACTIVIDAD
+FROM ACTIVIDAD
 WHERE id=@id_actividad
-EXEC sp_consultar_duracion 1
 
 -------------------------------/*CREAR CARRERA*/
 CREATE PROCEDURE sp_crear_carrera
@@ -267,36 +242,30 @@ CREATE PROCEDURE sp_crear_carrera
 @_fecha DATE,
 @_costo DECIMAL(10,2)
 AS
-INSERT INTO straviadb.dbo.CARRERA
+INSERT INTO CARRERA
 (id, id_actividad, nombre, fecha, costo
 ) VALUES
 (
 @_id, @_id_actividad, @nombre,@_fecha, @_costo)
 
-EXEC sp_crear_carrera 123, null, 'Maraton SJ', '2022-05-31', 12.50
-EXEC sp_crear_carrera 321, null, 'Maraton SC', '2022-05-31', 12.50
 /*OBTENER CARRERA*/
 CREATE PROCEDURE sp_consultar_carrera
 @id_carrera INT
 AS
-SELECT * FROM straviadb.dbo.CARRERA
+SELECT * FROM CARRERA
 WHERE id=@id_carrera
-EXEC sp_consultar_carrrera 123
+
 /*OBTENER CARRERAS*/
 CREATE PROCEDURE sp_consultar_carreras
 AS
-SELECT * FROM straviadb.dbo.CARRERA
-EXEC sp_consultar_carreras
+SELECT * FROM CARRERA
 
 /*ELIMINAR CARRERAS*/
 CREATE PROCEDURE sp_eliminar_carrera
 @_id INT
 AS
-BEGIN
-DELETE FROM straviadb.dbo.CARRERA 
+DELETE FROM CARRERA 
 WHERE id=@_id 
-END;
-EXEC sp_eliminar_carrera 123
 
 /*ACTUALIZAR DATOS DE CARRERA*/
 CREATE PROCEDURE sp_update_carrera
@@ -306,38 +275,37 @@ CREATE PROCEDURE sp_update_carrera
 @_fecha DATE,
 @_costo DECIMAL(10,2)
 AS
-UPDATE straviadb.dbo.CARRERA SET id=@_id,
+UPDATE CARRERA SET id=@_id,
 id_actividad =@_id_actividad ,nombre= @nombre,fecha=@_fecha,
 costo = @_costo
 WHERE id = @_id;
 
-
 -------------------------------/*CREAR CUENTA BANCARIA*/
-
 CREATE PROCEDURE sp_crear_cuenta_bancaria
 @id INT, --- id de la carrera a la que está asociada
 @no_cuenta VARCHAR(30)
 AS
-INSERT INTO straviadb.dbo.CUENTA_BANCARIA
+INSERT INTO CUENTA_BANCARIA
 (id, cuenta) VALUES (@id, @no_cuenta);
 
 /*CONSULTAR CUENTA POR ID*/
 CREATE PROCEDURE sp_consultar_cuenta_bancaria
 @id INT
 AS
-SELECT * FROM straviadb.dbo.CUENTA_BANCARIA
+SELECT * FROM CUENTA_BANCARIA
 WHERE id=@id
 /*CONSULTAR CUENTAS*/
 CREATE PROCEDURE sp_consultar_cuentas_bancarias
 AS
-SELECT * FROM straviadb.dbo.CUENTA_BANCARIA
+SELECT * FROM CUENTA_BANCARIA
+
 -------------------------------/*CREAR PAGO DE CARRERA*/
 CREATE PROCEDURE sp_crear_pagocarreras
 @id_carrera INT,
 @codigo INT,
 @estado VARCHAR(10)
 AS 
-INSERT INTO straviadb.dbo.PAGOCARRERA
+INSERT INTO PAGOCARRERA
 (id_carrera, codigo, estado) VALUES 
 (@id_carrera, @codigo, @estado);
 
@@ -345,44 +313,41 @@ INSERT INTO straviadb.dbo.PAGOCARRERA
 CREATE PROCEDURE sp_consultar_pago_carrera
 @id_carrera INT
 AS
-SELECT * FROM straviadb.dbo.PAGOCARRERA
+SELECT * FROM PAGOCARRERA
 WHERE id_carrera=@id_carrera
 
 /*CONSULTAR PAGOS DE CARRERAS*/
 CREATE PROCEDURE sp_consultar_pagos_carreras
 AS
-SELECT * FROM straviadb.dbo.PAGOCARRERA
+SELECT * FROM PAGOCARRERA
 
 -------------------------------/*CREAR GRUPO_VE_CARRERA*/
 CREATE PROCEDURE sp_crear_grupo_ve_carrera
 @id_carrera INT,
 @grupo INT
 AS 
-INSERT INTO straviadb.dbo.GRUPO_VE_CARRERA
+INSERT INTO GRUPO_VE_CARRERA
 (id_carrera, id_grupo) VALUES 
 (@id_carrera,@grupo);
 
 /*CONSULTAR GRUPOS VISIBLES DE UNA CARRERA*/
-
 CREATE PROCEDURE sp_consultar_grupos_ven_carrera
 @id_carrera INT
 AS
-SELECT nombre, id_admin  FROM straviadb.dbo.GRUPO as G
-JOIN straviadb.dbo.GRUPO_VE_CARRERA AS GVC ON GVC.id_grupo= G.id
+SELECT nombre, id_admin  FROM GRUPO as G
+JOIN GRUPO_VE_CARRERA AS GVC ON GVC.id_grupo= G.id
 WHERE GVC.id_carrera =@id_carrera;
+
 -------------------------------/*CREAR ROLES*/
 CREATE PROCEDURE sp_crear_rol
 @rol_id INT,
 @rol_nombre VARCHAR(10)
 AS
-INSERT INTO straviadb.dbo.ROL (id, nombre) VALUES(@rol_id, @rol_nombre);
+INSERT INTO ROL (id, nombre) VALUES(@rol_id, @rol_nombre);
 
-EXEC sp_crear_rol 1, 'organiza';
-EXEC sp_crear_rol 2, 'deportista';
-SELECT * FROM straviadb.dbo.ROL;
 
 -------------------------------/*CREAR USUARIOS*/
-CREATE PROCEDURE sp_insertar_usuario
+CREATE PROCEDURE sp_crear_usuario
 @_usuario VARCHAR(20),
 @rol_usuario INT,
 @id_carrera INT,
@@ -394,7 +359,7 @@ CREATE PROCEDURE sp_insertar_usuario
 @_fecha_nacimiento DATE,
 @_password_ VARCHAR(18)
 AS
-INSERT INTO straviadb.dbo.USUARIO(
+INSERT INTO USUARIO(
 usuario,
 id_rol,
 id_carrera,
@@ -418,15 +383,6 @@ _password
 @_password_
 );
 
-EXEC sp_insertar_usuario 'juancho23', 1,NULL,'Juan', 'Peña',
-'Rostrán',NULL, 'Nicaragüense', '2000-01-15', '1234567palomitas';
-
-EXEC sp_insertar_usuario 'jordan23', 2,NULL,'Michael', 'Jeffrey',
-'Jordan',NULL, 'Estadounidense', '1963-02-17', '1234567palomitas';
-
-EXEC sp_insertar_usuario 'lebron23', 2,NULL,'LeBron', 'Raymone',
-'James',NULL, 'Estadounidense', '1984-12-30', '1234567palomitas';
-
 
 /*CONSULTA PARA OBTENER USUARIO POR PRIMARY KEY*/
 CREATE PROCEDURE sp_consultar_usuario
@@ -435,15 +391,10 @@ AS
 SELECT * FROM straviadb.dbo.USUARIO
 WHERE usuario=@usuario_id;
 
-EXEC sp_consultar_usuario 'lebron23';
-
-
 /*CONSULTA PARA OBTENER TODOS LOS USUARIOS*/
 CREATE PROCEDURE sp_consultar_usuarios
 AS
 SELECT * FROM straviadb.dbo.USUARIO
-
-EXEC sp_consultar_usuarios;
 
 /*CONSULTA PARA OBTENER EDAD DE USUARIOS*/
 
@@ -458,16 +409,11 @@ DATEDIFF(YEAR, fecha_nacimiento, GETDATE())
 	> GETDATE() THEN 1
 	ELSE 0 END)
 	'Edad en años' 
-FROM straviadb.dbo.USUARIO
+FROM USUARIO
 WHERE usuario=@nombreusuario
-
-EXEC sp_edad_usuarios 'jordan23'
-EXEC sp_edad_usuarios 'juancho23'
-EXEC sp_edad_usuarios 'lebron23'
 
 /*ACTUALIZAR REGISTROS DE USUARIO*/
 
-------ACTUALIZAR FOTO-------
 CREATE PROCEDURE sp_update_usuario
 @nombreusuario VARCHAR(20),
 @id_rol INT,
@@ -480,7 +426,7 @@ CREATE PROCEDURE sp_update_usuario
 @fecha_nacimiento DATE,
 @_password VARCHAR(18)
 AS
-UPDATE straviadb.dbo.USUARIO 
+UPDATE USUARIO 
 SET  usuario= @nombreusuario,
 id_rol = @id_rol,id_carrera = @id_carrera,
 nombre = @nombre, apellido1 = @apellido1, apellido2 = @apellido2,
@@ -494,14 +440,11 @@ CREATE PROCEDURE sp_eliminar_usuario
 @nombreusuario VARCHAR(20)
 AS
 BEGIN
-DELETE FROM straviadb.dbo.ACTIVIDAD 
+DELETE FROM ACTIVIDAD 
 WHERE id_usuario=@nombreusuario 
-DELETE FROM straviadb.dbo.USUARIO 
+DELETE FROM USUARIO 
 WHERE usuario=@nombreusuario 
 END;
-
---EXEC sp_eliminar_usuario 'jordan23'
---EXEC sp_consultar_usuarios
 
 -------------------------------/*CREAR USUARIO_EN_GRUPO*/
 CREATE PROCEDURE sp_crear_usuario_en_grupo
@@ -526,7 +469,7 @@ CREATE PROCEDURE sp_crear_usuario_en_reto
 @id_usuario VARCHAR(20),
 @id_reto INT
 AS
-INSERT INTO straviadb.dbo.USUARIO_EN_RETO
+INSERT INTO USUARIO_EN_RETO
 (id_usuario, id_reto) VALUES
 (@id_usuario, @id_reto);
 
@@ -534,8 +477,8 @@ INSERT INTO straviadb.dbo.USUARIO_EN_RETO
 CREATE PROCEDURE sp_consultar_usuarios_en_reto
 @id_reto INT
 AS
-SELECT nombre, apellido1, apellido2 FROM straviadb.dbo.USUARIO AS U
-JOIN straviadb.dbo.USUARIO_EN_RETO AS UEG
+SELECT nombre, apellido1, apellido2 FROM USUARIO AS U
+JOIN USUARIO_EN_RETO AS UEG
 ON UEG.id_usuario = U.usuario
 WHERE UEG.id_reto = @id_reto
 -------------------------------/*CREAR USUARIO_SIGUE_USUARIO*/
@@ -543,22 +486,18 @@ CREATE PROCEDURE sp_crear_usuario_sigue_usuario
 @id_usuario VARCHAR(20),
 @id_seguido VARCHAR(20)
 AS
-INSERT INTO straviadb.dbo.USUARIO_SIGUE_USUARIO
+INSERT INTO USUARIO_SIGUE_USUARIO
 (id_user, user_sigue) VALUES
 (@id_usuario, @id_seguido);
-
-EXEC sp_crear_usuario_sigue_usuario "juancho23", "jordan23";
-EXEC sp_crear_usuario_sigue_usuario "juancho23", "lebron23";
 
 /*CONSULTAR SEGUIDOS POR UN USUARIO*/
 CREATE PROCEDURE sp_consultar_seguidos_x_usuario
 @id_usuario VARCHAR(20)
 AS
-SELECT usuario ,nombre, apellido1, apellido2 FROM straviadb.dbo.USUARIO AS U
-JOIN straviadb.dbo.USUARIO_SIGUE_USUARIO AS USU
+SELECT usuario ,nombre, apellido1, apellido2 FROM USUARIO AS U
+JOIN USUARIO_SIGUE_USUARIO AS USU
 ON USU.user_sigue = U.usuario
 WHERE USU.id_user = @id_usuario
 
-exec sp_consultar_usuarios;
-select * from straviadb.dbo.ACTIVIDAD;
-exec sp_consultar_seguidos_x_usuario "juancho23";
+
+
